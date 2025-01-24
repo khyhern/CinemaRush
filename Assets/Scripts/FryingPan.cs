@@ -8,6 +8,7 @@ public class FryingPan : MonoBehaviour
 
     [SerializeField] private float timeToBurnPan = 5f; // Time for the pan to burn
     [SerializeField] private Material burntPanMaterial; // Material to indicate the pan is burnt
+    [SerializeField] private Material originalPanMaterial; // Material for the clean (non-burnt) pan
 
     private Renderer panRenderer;
 
@@ -75,5 +76,20 @@ public class FryingPan : MonoBehaviour
         }
 
         burntSausageTimers.Clear();
+    }
+
+    public void ResetPan()
+    {
+        IsBurnt = false;
+        Debug.Log("The pan has been reset!");
+
+        if (originalPanMaterial != null)
+        {
+            panRenderer.material = originalPanMaterial;
+        }
+        else
+        {
+            Debug.LogWarning("Original pan material is not assigned!");
+        }
     }
 }
