@@ -57,7 +57,6 @@ public class CookSausage : MonoBehaviour
                 fryingPan.RemoveSausage(gameObject); // Notify the pan that this sausage left
             }
             isInPan = false;
-            cookTime = 0f; // Reset the timer if it leaves the pan
         }
     }
 
@@ -131,5 +130,6 @@ public class CookSausage : MonoBehaviour
         {
             fryingPan.AddBurntSausage(gameObject); // Re-register the burnt sausage after pan reset
         }
+
     }
 }
