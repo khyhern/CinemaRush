@@ -5,6 +5,7 @@ public class FryingPan : MonoBehaviour
 {
     public bool IsBurnt { get; private set; } = false; // Tracks if the pan is burnt
     private Dictionary<GameObject, float> burntSausageTimers = new Dictionary<GameObject, float>(); // Tracks timers for each burnt sausage
+    private List<GameObject> sausagesInPan = new List<GameObject>(); // Tracks all sausages currently in the pan
 
     [SerializeField] private float timeToBurnPan = 5f; // Time for the pan to burn
     [SerializeField] private Material burntPanMaterial; // Material to indicate the pan is burnt
@@ -45,6 +46,20 @@ public class FryingPan : MonoBehaviour
         }
     }
 
+    public void AddSausage(GameObject sausage)
+    {
+        if (!sausagesInPan.Contains(sausage))
+        {
+            sausagesInPan.Add(sausage);
+        }
+
+        // Add burnt sausage to tracking
+        if (IsBurnt && sausage.TryGetComponent<CookSausage>(out CookSausage cookSausage))
+        {
+            cookSausage.BurnSausage(); // Burn the sausage immediately if the pan is burnt
+        }
+    }
+
     public void AddBurntSausage(GameObject sausage)
     {
         if (!IsBurnt && !burntSausageTimers.ContainsKey(sausage))
@@ -55,6 +70,11 @@ public class FryingPan : MonoBehaviour
 
     public void RemoveSausage(GameObject sausage)
     {
+        if (sausagesInPan.Contains(sausage))
+        {
+            sausagesInPan.Remove(sausage);
+        }
+
         if (burntSausageTimers.ContainsKey(sausage))
         {
             burntSausageTimers.Remove(sausage);
@@ -83,6 +103,7 @@ public class FryingPan : MonoBehaviour
         IsBurnt = false;
         Debug.Log("The pan has been reset!");
 
+        // Reset the pan material
         if (originalPanMaterial != null)
         {
             panRenderer.material = originalPanMaterial;
@@ -90,6 +111,15 @@ public class FryingPan : MonoBehaviour
         else
         {
             Debug.LogWarning("Original pan material is not assigned!");
+        }
+
+        // Notify all sausages currently in the pan
+        foreach (GameObject sausage in sausagesInPan)
+        {
+            if (sausage != null && sausage.TryGetComponent<CookSausage>(out CookSausage cookSausage))
+            {
+                cookSausage.OnPanReset();
+            }
         }
     }
 }

@@ -30,10 +30,11 @@ public class CookSausage : MonoBehaviour
         {
             if (fryingPan != null)
             {
+                fryingPan.AddSausage(gameObject); // Register with the pan
+
                 if (isBurnt)
                 {
-                    // Notify the frying pan that this burnt sausage is now in it
-                    fryingPan.AddBurntSausage(gameObject);
+                    fryingPan.AddBurntSausage(gameObject); // Notify the pan that this burnt sausage is in it
                 }
                 else if (fryingPan.IsBurnt)
                 {
@@ -99,7 +100,7 @@ public class CookSausage : MonoBehaviour
         }
     }
 
-    private void BurnSausage()
+    public void BurnSausage()
     {
         if (isBurnt) return; // Prevent duplicate burning logic
 
@@ -121,6 +122,14 @@ public class CookSausage : MonoBehaviour
         if (fryingPan != null)
         {
             fryingPan.AddBurntSausage(gameObject);
+        }
+    }
+
+    public void OnPanReset()
+    {
+        if (isBurnt && fryingPan != null)
+        {
+            fryingPan.AddBurntSausage(gameObject); // Re-register the burnt sausage after pan reset
         }
     }
 }
