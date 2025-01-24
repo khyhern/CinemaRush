@@ -12,20 +12,49 @@ public class CookSausage : MonoBehaviour
     [SerializeField] private float cookDuration = 5f; // Time needed to cook
     [SerializeField] private float burnDuration = 10f; // Time after which the sausage burns
 
+    private FryingPan fryingPan; // Reference to the frying pan script
+
+    private void Start()
+    {
+        // Find the frying pan in the scene and reference its FryingPan script
+        fryingPan = FindObjectOfType<FryingPan>();
+        if (fryingPan == null)
+        {
+            Debug.LogError("FryingPan script not found in the scene!");
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the sausage collides with the frying pan
-        if (collision.collider.CompareTag("FryingPan") && !isBurnt)
+        if (collision.collider.CompareTag("FryingPan"))
         {
-            isInPan = true;
+            if (fryingPan != null)
+            {
+                if (isBurnt)
+                {
+                    // Notify the frying pan that this burnt sausage is now in it
+                    fryingPan.AddBurntSausage(gameObject);
+                }
+                else if (fryingPan.IsBurnt)
+                {
+                    BurnSausage(); // If the pan is already burnt, the sausage burns immediately
+                }
+                else
+                {
+                    isInPan = true; // Start cooking logic if the pan is not burnt
+                }
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        // Check if the sausage exits collision with the frying pan
         if (collision.collider.CompareTag("FryingPan"))
         {
+            if (fryingPan != null)
+            {
+                fryingPan.RemoveSausage(gameObject); // Notify the pan that this sausage left
+            }
             isInPan = false;
             cookTime = 0f; // Reset the timer if it leaves the pan
         }
@@ -33,17 +62,17 @@ public class CookSausage : MonoBehaviour
 
     private void Update()
     {
-        if (isInPan && !isBurnt)
+        if (isInPan && !isBurnt && fryingPan != null && !fryingPan.IsBurnt)
         {
-            cookTime += Time.deltaTime; // Increment cooking time
+            cookTime += Time.deltaTime;
 
-            // If the sausage is not yet cooked and reaches the cookDuration
+            // Cook the sausage after cookDuration
             if (!isCooked && cookTime >= cookDuration)
             {
                 CookSausageFully();
             }
 
-            // If the sausage is cooked and exceeds the burnDuration
+            // Burn the sausage after burnDuration
             if (cookTime >= burnDuration)
             {
                 BurnSausage();
@@ -72,11 +101,13 @@ public class CookSausage : MonoBehaviour
 
     private void BurnSausage()
     {
-        isBurnt = true; // Sausage is now burnt
-        isCooked = false; // Mark as no longer "just cooked"
+        if (isBurnt) return; // Prevent duplicate burning logic
+
+        isBurnt = true;
+        isCooked = false;
         Debug.Log("Sausage is burnt!");
 
-        // Change the sausage's material to the burnt material
+        // Change the sausage's material to the burnt sausage material
         if (burntMaterial != null)
         {
             GetComponent<Renderer>().material = burntMaterial;
@@ -84,6 +115,12 @@ public class CookSausage : MonoBehaviour
         else
         {
             Debug.LogWarning("Burnt material is not assigned!");
+        }
+
+        // Notify the frying pan that this burnt sausage is now in it
+        if (fryingPan != null)
+        {
+            fryingPan.AddBurntSausage(gameObject);
         }
     }
 }

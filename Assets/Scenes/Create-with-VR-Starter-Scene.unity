@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 269756449}
   - component: {fileID: 269756448}
   - component: {fileID: 269756452}
+  - component: {fileID: 269756453}
   m_Layer: 0
   m_Name: Pan
   m_TagString: FryingPan
@@ -351,6 +352,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &269756453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269756447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a53276145f45345a2d7d79600b4a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToBurnPan: 5
+  burntPanMaterial: {fileID: 2100000, guid: 44b2a3a1458da6a4a94c228d967474ad, type: 2}
 --- !u!4 &316942243 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
@@ -1450,16 +1465,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
         type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.17999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.17999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.59395075
       objectReference: {fileID: 0}
@@ -1572,11 +1577,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1102049704591585762, guid: 902263fb334e61d43af52e229c28b7ed,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1ce488131ebf40240b34032bab6f7676, type: 2}
     - target: {fileID: 1462465012687622199, guid: 902263fb334e61d43af52e229c28b7ed,
         type: 3}
       propertyPath: m_Name
