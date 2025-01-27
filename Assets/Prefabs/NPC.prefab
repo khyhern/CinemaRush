@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6091944860581908351}
   - component: {fileID: 5533109634504732163}
   - component: {fileID: 1731551114005850968}
-  - component: {fileID: 7234509985452825657}
   - component: {fileID: -260593742986207996}
+  - component: {fileID: 8767158027777619149}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -109,21 +109,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7234509985452825657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2165719898778860214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e43367eeacd9c2a47a4fcd3b2a67e5ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  moveSpeed: 3
-  stoppingDistance: 0.1
 --- !u!54 &-260593742986207996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,3 +136,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8767158027777619149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165719898778860214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43367eeacd9c2a47a4fcd3b2a67e5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  moveSpeed: 2
+  checkDelay: 0.5

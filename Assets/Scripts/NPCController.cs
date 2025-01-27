@@ -1,43 +1,157 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    private Transform target; // The NPC's current target queue point
-    public int CurrentTargetIndex { get; private set; } // Index of the current target queue point
-    private QueueManager queueManager; // Reference to the QueueManager
-    public float moveSpeed = 3f; // Movement speed
-    public float stoppingDistance = 0.1f; // Distance to stop moving
+    [Header("QueuePoints Settings")]
+    public string queuePointTag = "QueuePoint"; // Tag to identify queue points in the scene
+    public string happyExitTag = "HappyExitPath"; // Tag to identify happyExit waypoints in the scene
+    public string angryExitTag = "AngryExitPath"; // Tag to identify angryExit waypoints in the scene
 
-    private bool isMovingToNextPoint = false;
+    public float moveSpeed = 2f; // Movement speed of the NPC
+    public float checkDelay = 0.5f; // Delay between checks for the next queue point
 
-    public void SetTarget(Transform newTarget, int index, QueueManager manager)
+    private List<Transform> queuePoints = new List<Transform>(); // List of queue points
+    private List<Transform> happyExitPath = new List<Transform>(); // List of happyExit waypoints
+    private List<Transform> angryExitPath = new List<Transform>(); // List of angryExit waypoints
+
+    private int currentQueuePointIndex = 0; // Index of the current queue point
+    private static Dictionary<int, bool> queuePointOccupied = new Dictionary<int, bool>(); // Tracks if queue points are occupied
+
+    [Header("Spawner Reference")]
+    private NPCSpawner spawner; // Reference to the NPCSpawner
+
+    private void Start()
     {
-        target = newTarget;
-        CurrentTargetIndex = index; // Track the index of the target queue point
-        queueManager = manager;
-        isMovingToNextPoint = true;
-    }
-
-    private void Update()
-    {
-        if (target != null && isMovingToNextPoint)
+        // Find all queue points tagged with the specified tag
+        GameObject[] queuePointObjects = GameObject.FindGameObjectsWithTag(queuePointTag);
+        foreach (GameObject obj in queuePointObjects)
         {
-            // Move toward the target position
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            queuePoints.Add(obj.transform);
+        }
 
-            // Face the target
-            Vector3 direction = (target.position - transform.position).normalized;
-            if (direction != Vector3.zero)
-            {
-                transform.rotation = Quaternion.LookRotation(direction);
-            }
+        // Find all happy exit points tagged with the specified tag
+        GameObject[] happyExitObjects = GameObject.FindGameObjectsWithTag(happyExitTag);
+        foreach (GameObject obj in happyExitObjects)
+        {
+            happyExitPath.Add(obj.transform);
+        }
 
-            // Check if the NPC has reached its current target
-            if (Vector3.Distance(transform.position, target.position) <= stoppingDistance)
+        // Find all angry exit points tagged with the specified tag
+        GameObject[] angryExitObjects = GameObject.FindGameObjectsWithTag(angryExitTag);
+        foreach (GameObject obj in angryExitObjects)
+        {
+            angryExitPath.Add(obj.transform);
+        }
+
+        // Sort queue points in descending order by their name or position if needed
+        queuePoints.Sort((a, b) => b.name.CompareTo(a.name));
+
+        // Initialize queue point occupied status
+        for (int i = 0; i < queuePoints.Count; i++)
+        {
+            if (!queuePointOccupied.ContainsKey(i))
             {
-                isMovingToNextPoint = false; // Stop moving
-                queueManager.MoveNPCToNextPoint(gameObject, CurrentTargetIndex); // Check if the NPC can move closer
+                queuePointOccupied[i] = false;
             }
         }
+
+        StartCoroutine(MoveToQueuePoint());
     }
+
+
+    private IEnumerator MoveToQueuePoint()
+    {
+        while (currentQueuePointIndex < queuePoints.Count)
+        {
+            Transform targetQueuePoint = queuePoints[currentQueuePointIndex];
+
+            // Check if the queue point is not occupied
+            if (!queuePointOccupied[currentQueuePointIndex])
+            {
+                queuePointOccupied[currentQueuePointIndex] = true; // Mark current queue point as occupied
+
+                // Move towards the queue point
+                while (Vector3.Distance(transform.position, targetQueuePoint.position) > 0.1f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetQueuePoint.position, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
+
+                transform.position = targetQueuePoint.position; // Snap to exact position
+
+                // Mark the previous queue point as unoccupied (if not the first one)
+                if (currentQueuePointIndex > 0)
+                {
+                    queuePointOccupied[currentQueuePointIndex - 1] = false;
+                }
+
+                currentQueuePointIndex++; // Move to the next queue point
+            }
+
+            // Wait before checking again
+            yield return new WaitForSeconds(checkDelay);
+        }
+
+        // Ensure the last queue point is marked as unoccupied after the NPC moves past it
+        if (currentQueuePointIndex == queuePoints.Count)
+        {
+            queuePointOccupied[currentQueuePointIndex - 1] = false;
+        }
+
+
+        // NPC reached the end of the queue points
+        OnQueueComplete();
+    }
+
+    private void OnQueueComplete()
+    {
+
+        Debug.Log("NPC has completed the queue.");
+        // Determine which path to take (happy or angry) - for this example, we'll use random
+        bool isHappy = Random.value > 0.5f; // Replace with your own logic to decide path
+
+        if (isHappy)
+        {
+            StartCoroutine(FollowExitPath(happyExitPath));
+        }
+        else
+        {
+            StartCoroutine(FollowExitPath(angryExitPath));
+        }
+    }
+
+    private IEnumerator FollowExitPath(List<Transform> exitPath)
+    {
+        foreach (Transform exitPoint in exitPath)
+        {
+            while (Vector3.Distance(transform.position, exitPoint.position) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, exitPoint.position, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        // Once the NPC reaches the end of the path, destroy it
+        Debug.Log("NPC has exited the scene.");
+
+        // Notify the spawner that this NPC has been processed
+        if (spawner != null)
+        {
+            spawner.OnNPCProcessed();
+        }
+        else
+        {
+            Debug.LogError("Spawner reference is null. Make sure it is assigned in the Inspector.");
+        }
+
+        Destroy(gameObject);
+    }
+
+    public void SetSpawner(NPCSpawner spawner)
+    {
+        this.spawner = spawner;
+    }
+
 }
