@@ -11,11 +11,11 @@ public class Cashier : MonoBehaviour
         // Check if an NPC is in the cashier zone and we’re not already processing
         if (other.CompareTag("NPC") && !isProcessing)
         {
-            StartCoroutine(ProcessNPC());
+            StartCoroutine(ProcessNPC(other.gameObject));
         }
     }
 
-    private System.Collections.IEnumerator ProcessNPC()
+    private System.Collections.IEnumerator ProcessNPC(GameObject npc)
     {
         isProcessing = true;
 
@@ -23,9 +23,8 @@ public class Cashier : MonoBehaviour
         yield return new WaitForSeconds(processTime);
 
         // Notify the QueueManager to remove the first NPC
-        queueManager.ServeNextCustomer();
+        queueManager.ServeNPC(npc, 0); // Ensure the first queue point index is passed
 
         isProcessing = false;
-
     }
 }

@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public Transform target; // The NPC's assigned queue position
-    public float moveSpeed = 3f; // Speed of movement
+    private Transform target; // The NPC's current target queue point
+    public int CurrentTargetIndex { get; private set; } // Index of the current target queue point
+    private QueueManager queueManager; // Reference to the QueueManager
+    public float moveSpeed = 3f; // Movement speed
     public float stoppingDistance = 0.1f; // Distance to stop moving
+
+    private bool isMovingToNextPoint = false;
+
+    public void SetTarget(Transform newTarget, int index, QueueManager manager)
+    {
+        target = newTarget;
+        CurrentTargetIndex = index; // Track the index of the target queue point
+        queueManager = manager;
+        isMovingToNextPoint = true;
+    }
 
     private void Update()
     {
-        if (target != null)
+        if (target != null && isMovingToNextPoint)
         {
-            // Move towards the target position
+            // Move toward the target position
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
             // Face the target
@@ -20,10 +32,11 @@ public class NPCController : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(direction);
             }
 
-            // Stop moving if close enough
+            // Check if the NPC has reached its current target
             if (Vector3.Distance(transform.position, target.position) <= stoppingDistance)
             {
-                target = null; // Stop movement
+                isMovingToNextPoint = false; // Stop moving
+                queueManager.MoveNPCToNextPoint(gameObject, CurrentTargetIndex); // Check if the NPC can move closer
             }
         }
     }
