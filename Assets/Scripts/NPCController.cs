@@ -1,30 +1,57 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    public Transform target; // The NPC's assigned queue position
+    private Queue<Transform> waypoints = new Queue<Transform>(); // Queue of waypoints for L-shaped movement
+    public Transform target; // Final queue position
     public float moveSpeed = 3f; // Speed of movement
     public float stoppingDistance = 0.1f; // Distance to stop moving
 
+    private Transform currentWaypoint; // The current waypoint the NPC is moving toward
+
     private void Update()
     {
-        if (target != null)
+        if (currentWaypoint != null)
         {
-            // Move towards the target position
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            // Move toward the current waypoint
+            MoveTo(currentWaypoint);
 
-            // Face the target
-            Vector3 direction = (target.position - transform.position).normalized;
-            if (direction != Vector3.zero)
+            // If reached the waypoint, move to the next one
+            if (Vector3.Distance(transform.position, currentWaypoint.position) <= stoppingDistance)
             {
-                transform.rotation = Quaternion.LookRotation(direction);
+                currentWaypoint = waypoints.Count > 0 ? waypoints.Dequeue() : target;
             }
+        }
+        else if (target != null)
+        {
+            // Move toward the final target (queue position)
+            MoveTo(target);
+        }
+    }
 
-            // Stop moving if close enough
-            if (Vector3.Distance(transform.position, target.position) <= stoppingDistance)
-            {
-                target = null; // Stop movement
-            }
+    public void SetWaypoints(List<Transform> waypointList)
+    {
+        // Add waypoints to the queue
+        waypoints = new Queue<Transform>(waypointList);
+        currentWaypoint = waypoints.Count > 0 ? waypoints.Dequeue() : target; // Start with the first waypoint
+    }
+
+    public void SetFinalTarget(Transform finalTarget)
+    {
+        target = finalTarget;
+    }
+
+    private void MoveTo(Transform destination)
+    {
+        // Move towards the destination
+        transform.position = Vector3.MoveTowards(transform.position, destination.position, moveSpeed * Time.deltaTime);
+
+        // Rotate to face the destination
+        Vector3 direction = (destination.position - transform.position).normalized;
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
         }
     }
 }
