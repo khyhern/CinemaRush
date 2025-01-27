@@ -148,15 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43367eeacd9c2a47a4fcd3b2a67e5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  moveSpeed: 2
-  checkDelay: 0.5
+  queuePointTag: QueuePoint
+  happyExitTag: HappyExitPath
+  angryExitTag: AngryExitPath
+  moveSpeed: 3
+  checkDelay: 0

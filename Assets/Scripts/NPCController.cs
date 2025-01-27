@@ -22,6 +22,8 @@ public class NPCController : MonoBehaviour
     [Header("Spawner Reference")]
     private NPCSpawner spawner; // Reference to the NPCSpawner
 
+    private bool isOrderCompletedCorrectly = false; // Tracks if the order was completed correctly
+
     private void Start()
     {
         // Find all queue points tagged with the specified tag
@@ -94,12 +96,6 @@ public class NPCController : MonoBehaviour
             yield return new WaitForSeconds(checkDelay);
         }
 
-        // Ensure the last queue point is marked as unoccupied after the NPC moves past it
-        if (currentQueuePointIndex == queuePoints.Count)
-        {
-            queuePointOccupied[currentQueuePointIndex - 1] = false;
-        }
-
 
         // NPC reached the end of the queue points
         OnQueueComplete();
@@ -107,9 +103,20 @@ public class NPCController : MonoBehaviour
 
     private void OnQueueComplete()
     {
-
         Debug.Log("NPC has completed the queue.");
-        // Determine which path to take (happy or angry) - for this example, we'll use random
+
+        // Delay duration can be a fixed value or dynamically calculated
+        float delayDuration = Random.Range(2f, 5f); // Example: random delay between 2-5 seconds
+        StartCoroutine(HandleExitAfterDelay(delayDuration));
+    }
+
+    private IEnumerator HandleExitAfterDelay(float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+
+        // Determine which path to take (happy or angry)
         bool isHappy = Random.value > 0.5f; // Replace with your own logic to decide path
 
         if (isHappy)
@@ -124,6 +131,12 @@ public class NPCController : MonoBehaviour
 
     private IEnumerator FollowExitPath(List<Transform> exitPath)
     {
+        // Ensure the last queue point is marked as unoccupied after the NPC moves past it
+        if (currentQueuePointIndex == queuePoints.Count)
+        {
+            queuePointOccupied[currentQueuePointIndex - 1] = false;
+        }
+
         foreach (Transform exitPoint in exitPath)
         {
             while (Vector3.Distance(transform.position, exitPoint.position) > 0.1f)
@@ -153,5 +166,11 @@ public class NPCController : MonoBehaviour
     {
         this.spawner = spawner;
     }
+
+    public void SetOrderStatus(bool isCompleted)
+    {
+        isOrderCompletedCorrectly = isCompleted; // Set this value based on external logic
+    }
+
 
 }
