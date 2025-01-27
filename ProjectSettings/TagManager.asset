@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FryingPan
+  - NPC
   layers:
   - Default
   - TransparentFX
