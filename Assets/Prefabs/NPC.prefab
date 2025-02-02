@@ -251,4 +251,4 @@ MonoBehaviour:
   angryExitTag: AngryExitPath
   moveSpeed: 3
   checkDelay: 0
-  orderText: {fileID: 1582871015505318050}
+  NPCorderText: {fileID: 1582871015505318050}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class NPCController : MonoBehaviour
 {
@@ -19,21 +20,17 @@ public class NPCController : MonoBehaviour
     private int currentQueuePointIndex = 0; // Index of the current queue point
     private static Dictionary<int, bool> queuePointOccupied = new Dictionary<int, bool>(); // Tracks if queue points are occupied
 
-    [Header("UI Elements")]
-    public TextMesh orderText; // Reference to a 3D TextMesh object
-    private Camera mainCamera; // Reference to the main camera for billboard effect
-
     [Header("Spawner Reference")]
     private NPCSpawner spawner; // Reference to the NPCSpawner
 
     private bool isOrderCompletedCorrectly = false; // Tracks if the order was completed correctly
-    private string npcOrder; // Stores the randomly generated order
+
+    private string npcOrder;
+
+    public TextMesh NPCorderText;
 
     private void Start()
     {
-        // Find the main camera for the billboard effect
-        mainCamera = Camera.main;
-
         // Find all queue points tagged with the specified tag
         GameObject[] queuePointObjects = GameObject.FindGameObjectsWithTag(queuePointTag);
         foreach (GameObject obj in queuePointObjects)
@@ -55,8 +52,8 @@ public class NPCController : MonoBehaviour
             angryExitPath.Add(obj.transform);
         }
 
-        // Sort queue points based on position (adjust axis as needed)
-        queuePoints.Sort((a, b) => a.position.z.CompareTo(b.position.z));
+        // Sort queue points in descending order by their name or position if needed
+        queuePoints.Sort((a, b) => b.name.CompareTo(a.name));
 
         // Initialize queue point occupied status
         for (int i = 0; i < queuePoints.Count; i++)
@@ -70,15 +67,6 @@ public class NPCController : MonoBehaviour
         StartCoroutine(MoveToQueuePoint());
     }
 
-    private void Update()
-    {
-        // Ensure the order text always faces the camera (billboard effect)
-        if (orderText != null && mainCamera != null)
-        {
-            orderText.transform.LookAt(mainCamera.transform);
-            orderText.transform.Rotate(0, 180, 0); // Flip to make it readable
-        }
-    }
 
     private IEnumerator MoveToQueuePoint()
     {
@@ -106,8 +94,7 @@ public class NPCController : MonoBehaviour
                     queuePointOccupied[currentQueuePointIndex - 1] = false;
                 }
 
-                // If the NPC reaches the counter (last queue position), generate an order
-                if (currentQueuePointIndex == queuePoints.Count - 1)
+                if (currentQueuePointIndex == 0)
                 {
                     GenerateRandomOrder();
                 }
@@ -119,6 +106,7 @@ public class NPCController : MonoBehaviour
             yield return new WaitForSeconds(checkDelay);
         }
 
+
         // NPC reached the end of the queue points
         OnQueueComplete();
     }
@@ -126,53 +114,9 @@ public class NPCController : MonoBehaviour
     private void OnQueueComplete()
     {
         Debug.Log("NPC has completed the queue.");
-    }
 
-    /// <summary>
-    /// Generates a randomized order for the NPC and updates the 3D TextMesh.
-    /// </summary>
-    private void GenerateRandomOrder()
-    {
-        string[] menuItems = { "Hotdog", "Popcorn" };
-        string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
-
-        // Randomly pick a main item
-        string mainItem = menuItems[Random.Range(0, menuItems.Length)];
-
-        // 50% chance to include a soda in the order
-        bool includeSoda = Random.value > 0.5f;
-        string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
-
-        // Construct order
-        npcOrder = includeSoda ? $"{mainItem} + {soda}" : mainItem;
-
-        Debug.Log($"NPC Order: {npcOrder}");
-
-        // Update 3D TextMesh
-        if (orderText != null)
-        {
-            orderText.text = npcOrder;
-        }
-        else
-        {
-            Debug.LogError("OrderText is not assigned in the Inspector.");
-        }
-    }
-
-    /// <summary>
-    /// Checks if the given order matches the NPC's original order.
-    /// </summary>
-    public bool CheckOrder(string givenOrder)
-    {
-        return npcOrder == givenOrder;
-    }
-
-    /// <summary>
-    /// Makes the NPC leave the queue based on order correctness.
-    /// </summary>
-    public void LeaveQueue()
-    {
-        float delayDuration = 2f; // Optional delay before leaving
+        // Delay duration can be a fixed value or dynamically calculated
+        float delayDuration = Random.Range(2f, 5f); // Example: random delay between 2-5 seconds
         StartCoroutine(HandleExitAfterDelay(delayDuration));
     }
 
@@ -181,8 +125,9 @@ public class NPCController : MonoBehaviour
         // Wait for the specified delay
         yield return new WaitForSeconds(delay);
 
+
         // Determine which path to take (happy or angry)
-        bool isHappy = isOrderCompletedCorrectly;
+        bool isHappy = Random.value > 0.5f; // Replace with your own logic to decide path
 
         if (isHappy)
         {
@@ -197,7 +142,7 @@ public class NPCController : MonoBehaviour
     private IEnumerator FollowExitPath(List<Transform> exitPath)
     {
         // Ensure the last queue point is marked as unoccupied after the NPC moves past it
-        if (currentQueuePointIndex >= queuePoints.Count)
+        if (currentQueuePointIndex == queuePoints.Count)
         {
             queuePointOccupied[currentQueuePointIndex - 1] = false;
         }
@@ -236,4 +181,31 @@ public class NPCController : MonoBehaviour
     {
         isOrderCompletedCorrectly = isCompleted; // Set this value based on external logic
     }
-}
+    private void GenerateRandomOrder()
+    {
+        string[] menuItems = { "Hotdog", "Popcorn" };
+        string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
+
+        // Randomly pick a main item
+        string mainItem = menuItems[Random.Range(0, menuItems.Length)];
+
+        // 50% chance to include a soda in the order
+        bool includeSoda = Random.value > 0.5f;
+        string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
+
+        // Construct order
+        npcOrder = includeSoda ? $"{mainItem} + {soda}" : mainItem;
+
+        Debug.Log($"NPC Order: {npcOrder}");
+
+        // Update 3D TextMesh if the NPC is in the first position
+        if (NPCorderText != null)
+        {
+            NPCorderText.text = npcOrder;
+        }
+        else
+        {
+            Debug.LogError("OrderText is not assigned in the Inspector.");
+        }
+    }
+    }
