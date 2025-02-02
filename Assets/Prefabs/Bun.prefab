@@ -226,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b6ecc102e2476354a8f938c11c5a792c,
         type: 3}
       propertyPath: m_Name
-      value: Hotdog_Bun
+      value: Bun
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b6ecc102e2476354a8f938c11c5a792c,
         type: 3}
@@ -257,6 +257,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 107091943950433223}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6ecc102e2476354a8f938c11c5a792c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3160353786273205952}
   m_SourcePrefab: {fileID: 100100000, guid: b6ecc102e2476354a8f938c11c5a792c, type: 3}
 --- !u!4 &8390532190055083369 stripped
 Transform:
@@ -471,3 +475,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3185585171756331504, guid: b6ecc102e2476354a8f938c11c5a792c, type: 3}
+--- !u!114 &3160353786273205952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9167912940698269651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9316d2251a36a45b65836c92de6d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Socket: {fileID: 2178302349479735171}
+  Hotdog: {fileID: 2386748040556366535, guid: 8eb12ad6032bde247808879871b323ff, type: 3}

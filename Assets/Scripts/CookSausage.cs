@@ -16,6 +16,7 @@ public class CookSausage : MonoBehaviour
 
     private void Start()
     {
+        state = SausageState.Raw;
         // Find the frying pan in the scene and reference its FryingPan script
         fryingPan = FindObjectOfType<FryingPan>();
         if (fryingPan == null)
@@ -80,12 +81,16 @@ public class CookSausage : MonoBehaviour
         }
     }
 
+    public enum SausageState { Raw, Cooked, Burnt }
+    public SausageState state; // Assign state in Inspector or change dynamically
+
     private void CookSausageFully()
     {
         if (!isCooked && !isBurnt) // Only cook if not burnt
         {
             isCooked = true;
             Debug.Log("Sausage is cooked!");
+            state = SausageState.Cooked;
 
             // Change the sausage's material to the cooked material
             if (cookedMaterial != null)
@@ -105,6 +110,7 @@ public class CookSausage : MonoBehaviour
 
         isBurnt = true;
         isCooked = false;
+        state = SausageState.Burnt;
         Debug.Log("Sausage is burnt!");
 
         // Change the sausage's material to the burnt sausage material

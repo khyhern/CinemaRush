@@ -5,53 +5,65 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
     [Header("QueuePoints Settings")]
-    public string queuePointTag = "QueuePoint"; // Tag to identify queue points in the scene
-    public string happyExitTag = "HappyExitPath"; // Tag to identify happyExit waypoints in the scene
-    public string angryExitTag = "AngryExitPath"; // Tag to identify angryExit waypoints in the scene
+    public string queuePointTag = "QueuePoint";
+    public string happyExitTag = "HappyExitPath";
+    public string angryExitTag = "AngryExitPath";
+    public string trayTag = "Tray"; // Tag to identify the tray object
 
-    public float moveSpeed = 2f; // Movement speed of the NPC
-    public float checkDelay = 0.5f; // Delay between checks for the next queue point
+    public float moveSpeed = 2f;
+    public float checkDelay = 0.5f;
 
-    private List<Transform> queuePoints = new List<Transform>(); // List of queue points
-    private List<Transform> happyExitPath = new List<Transform>(); // List of happyExit waypoints
-    private List<Transform> angryExitPath = new List<Transform>(); // List of angryExit waypoints
+    private List<Transform> queuePoints = new List<Transform>();
+    private List<Transform> happyExitPath = new List<Transform>();
+    private List<Transform> angryExitPath = new List<Transform>();
 
-    private int currentQueuePointIndex = 0; // Index of the current queue point
-    private static Dictionary<int, bool> queuePointOccupied = new Dictionary<int, bool>(); // Tracks if queue points are occupied
+    private int currentQueuePointIndex = 0;
+    private static Dictionary<int, bool> queuePointOccupied = new Dictionary<int, bool>();
 
     [Header("UI Elements")]
-    public TextMesh orderText; // Reference to a 3D TextMesh object
+    public TextMesh orderText;
 
     [Header("Spawner Reference")]
-    private NPCSpawner spawner; // Reference to the NPCSpawner
+    private NPCSpawner spawner;
 
-    private bool isOrderCompletedCorrectly = false; // Tracks if the order was completed correctly
-    private string npcOrder; // Stores the randomly generated order
+    private bool isOrderCompletedCorrectly = false;
+    private string npcOrder;
+    private Transform tray; // Reference to the tray object
 
     private void Start()
     {
-        // Find all queue points tagged with the specified tag
+        // Find all queue points
         GameObject[] queuePointObjects = GameObject.FindGameObjectsWithTag(queuePointTag);
         foreach (GameObject obj in queuePointObjects)
         {
             queuePoints.Add(obj.transform);
         }
 
-        // Find all happy exit points tagged with the specified tag
+        // Find happy exit points
         GameObject[] happyExitObjects = GameObject.FindGameObjectsWithTag(happyExitTag);
         foreach (GameObject obj in happyExitObjects)
         {
             happyExitPath.Add(obj.transform);
         }
 
-        // Find all angry exit points tagged with the specified tag
+        // Find angry exit points
         GameObject[] angryExitObjects = GameObject.FindGameObjectsWithTag(angryExitTag);
         foreach (GameObject obj in angryExitObjects)
         {
             angryExitPath.Add(obj.transform);
         }
 
-        // Sort queue points based on position (adjust axis as needed)
+        // Find the tray
+        GameObject trayObject = GameObject.FindGameObjectWithTag(trayTag);
+        if (trayObject != null)
+        {
+            tray = trayObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Tray object not found! Make sure it's tagged correctly.");
+        }
+
         queuePoints.Sort((a, b) => a.position.z.CompareTo(b.position.z));
 
         // Initialize queue point occupied status
@@ -72,73 +84,123 @@ public class NPCController : MonoBehaviour
         {
             Transform targetQueuePoint = queuePoints[currentQueuePointIndex];
 
-            // Check if the queue point is not occupied
             if (!queuePointOccupied[currentQueuePointIndex])
             {
-                queuePointOccupied[currentQueuePointIndex] = true; // Mark current queue point as occupied
+                queuePointOccupied[currentQueuePointIndex] = true;
 
-                // Move towards the queue point
                 while (Vector3.Distance(transform.position, targetQueuePoint.position) > 0.1f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, targetQueuePoint.position, moveSpeed * Time.deltaTime);
                     yield return null;
                 }
 
-                transform.position = targetQueuePoint.position; // Snap to exact position
+                transform.position = targetQueuePoint.position;
 
-                // Mark the previous queue point as unoccupied (if not the first one)
                 if (currentQueuePointIndex > 0)
                 {
                     queuePointOccupied[currentQueuePointIndex - 1] = false;
                 }
 
-                // If the NPC reaches the first queue position, generate an order
-                if (currentQueuePointIndex == 0)
+                if (currentQueuePointIndex == queuePoints.Count - 1)
                 {
                     GenerateRandomOrder();
+                    StartCoroutine(WaitForOrder());
                 }
 
-                currentQueuePointIndex++; // Move to the next queue point
+                currentQueuePointIndex++;
             }
 
-            // Wait before checking again
             yield return new WaitForSeconds(checkDelay);
         }
-
-        // NPC reached the end of the queue points
-        OnQueueComplete();
     }
 
-    private void OnQueueComplete()
+    /// <summary>
+    /// Waits at the tray for an order to be placed.
+    /// </summary>
+    private IEnumerator WaitForOrder()
     {
-        Debug.Log("NPC has completed the queue.");
+        Debug.Log("NPC is waiting for the order...");
 
-        // Delay duration can be a fixed value or dynamically calculated
-        float delayDuration = Random.Range(2f, 5f); // Example: random delay between 2-5 seconds
+        float waitTime = 60f;
+        float timer = 0f;
+
+        while (timer < waitTime)
+        {
+            yield return new WaitForSeconds(1f);
+            timer += 1f;
+
+            // Check if an order is placed on the tray
+            if (CheckTrayForOrder())
+            {
+                ValidateOrder();
+                yield break;
+            }
+        }
+
+        // If time runs out, NPC leaves angrily
+        Debug.Log("NPC waited too long! Leaving angrily.");
+        LeaveQueue(false);
+    }
+
+    /// <summary>
+    /// Checks if an order has been placed on the tray.
+    /// </summary>
+    private bool CheckTrayForOrder()
+    {
+        if (tray == null) return false;
+
+        foreach (Transform item in tray)
+        {
+            OrderItem orderItem = item.GetComponent<OrderItem>(); // Assume there's an OrderItem script
+            if (orderItem != null)
+            {
+                Debug.Log($"Order found on tray: {orderItem.itemName}");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Validates the order on the tray against the NPC's order.
+    /// </summary>
+    private void ValidateOrder()
+    {
+        if (tray == null) return;
+
+        string trayOrder = "";
+
+        foreach (Transform item in tray)
+        {
+            OrderItem orderItem = item.GetComponent<OrderItem>();
+            if (orderItem != null)
+            {
+                trayOrder += trayOrder == "" ? orderItem.itemName : $" + {orderItem.itemName}";
+            }
+        }
+
+        isOrderCompletedCorrectly = npcOrder == trayOrder;
+        Debug.Log(isOrderCompletedCorrectly ? "Correct order! NPC is happy." : "Wrong order! NPC is angry.");
+
+        LeaveQueue(isOrderCompletedCorrectly);
+    }
+
+    public void LeaveQueue(bool correctOrder)
+    {
+        isOrderCompletedCorrectly = correctOrder;
+        float delayDuration = 2f;
         StartCoroutine(HandleExitAfterDelay(delayDuration));
     }
 
     private IEnumerator HandleExitAfterDelay(float delay)
     {
-        // Wait for the specified delay
         yield return new WaitForSeconds(delay);
-
-        // Determine which path to take (happy or angry)
-        bool isHappy = isOrderCompletedCorrectly;
-
-        if (isHappy)
-        {
-            StartCoroutine(FollowExitPath(happyExitPath));
-        }
-        else
-        {
-            StartCoroutine(FollowExitPath(angryExitPath));
-        }
+        StartCoroutine(FollowExitPath(isOrderCompletedCorrectly ? happyExitPath : angryExitPath));
     }
 
     private IEnumerator FollowExitPath(List<Transform> exitPath)
     {
-        // Ensure the last queue point is marked as unoccupied after the NPC moves past it
         if (currentQueuePointIndex >= queuePoints.Count)
         {
             queuePointOccupied[currentQueuePointIndex - 1] = false;
@@ -153,10 +215,8 @@ public class NPCController : MonoBehaviour
             }
         }
 
-        // Once the NPC reaches the end of the path, destroy it
         Debug.Log("NPC has exited the scene.");
 
-        // Notify the spawner that this NPC has been processed
         if (spawner != null)
         {
             spawner.OnNPCProcessed();
@@ -174,39 +234,23 @@ public class NPCController : MonoBehaviour
         this.spawner = spawner;
     }
 
-    public void SetOrderStatus(bool isCompleted)
-    {
-        isOrderCompletedCorrectly = isCompleted; // Set this value based on external logic
-    }
-
     /// <summary>
-    /// Generates a randomized order for the NPC and updates the 3D TextMesh.
+    /// Generates a random order.
     /// </summary>
     private void GenerateRandomOrder()
     {
         string[] menuItems = { "Hotdog", "Popcorn" };
         string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
 
-        // Randomly pick a main item
         string mainItem = menuItems[Random.Range(0, menuItems.Length)];
-
-        // 50% chance to include a soda in the order
         bool includeSoda = Random.value > 0.5f;
         string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
 
-        // Construct order
         npcOrder = includeSoda ? $"{mainItem} + {soda}" : mainItem;
 
-        Debug.Log($"NPC Order: {npcOrder}");
-
-        // Update 3D TextMesh if the NPC is in the first position
         if (orderText != null)
         {
             orderText.text = npcOrder;
-        }
-        else
-        {
-            Debug.LogError("OrderText is not assigned in the Inspector.");
         }
     }
 }
