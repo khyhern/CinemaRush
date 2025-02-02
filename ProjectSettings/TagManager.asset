@@ -9,6 +9,7 @@ TagManager:
   - QueuePoint
   - HappyExitPath
   - AngryExitPath
+  - FridgeTopDoor
   layers:
   - Default
   - TransparentFX
