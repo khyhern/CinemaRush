@@ -55,7 +55,7 @@ public class NPCOrderSystem : MonoBehaviour
         }
 
         // Get NPC order from NPCController
-        order = NPCController.Instance.npcOrder;
+        order = npcController.npcOrder;
     }
 
     // This method gets triggered when the button is pressed
@@ -105,7 +105,14 @@ public class NPCOrderSystem : MonoBehaviour
             }
         }
 
-        isHappy = order == trayOrder;
+        if (order == trayOrder)
+        {
+            CompleteOrder(true);
+        }
+        else
+        {
+            CompleteOrder(false);
+        }
         Debug.Log(isHappy ? "✅ Correct order! NPC is happy." : "❌ Wrong order! NPC is angry.");
     }
     public void CompleteOrder(bool isOrderCorrect)

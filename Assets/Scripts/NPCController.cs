@@ -5,20 +5,7 @@ using UnityEngine.Profiling;
 
 public class NPCController : MonoBehaviour
 {
-    public static NPCController Instance { get; private set; }
-    public string npcOrder { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public string npcOrder;
 
     [Header("QueuePoints Settings")]
     public string queuePointTag = "QueuePoint"; // Tag to identify queue points in the scene
