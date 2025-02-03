@@ -585,6 +585,25 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &471199171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5784419620205776923, guid: 07a27a882162deb49bd2981fb9618870,
+    type: 3}
+  m_PrefabInstance: {fileID: 4597403234176197078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &471199173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471199171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1b2ad95b6b9a14fbf1247bec0920cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashierTrigger: {fileID: 2013092717}
 --- !u!1001 &526042993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -703,6 +722,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b83970ba45e64fc9a7749d8db540114, type: 3}
+--- !u!1001 &533226364
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2386748040556366535, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_Name
+      value: Hotdog
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.5410315
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9796658
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5562786
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710784
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.70710576
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050271884215619709, guid: 8eb12ad6032bde247808879871b323ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7678887181253257892, guid: 8eb12ad6032bde247808879871b323ff, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8eb12ad6032bde247808879871b323ff, type: 3}
 --- !u!4 &562312437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 202364688, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
@@ -1019,56 +1107,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32833bb05969a9748baf21b48fbd8fda, type: 3}
---- !u!1 &1154507833 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3670640954173268670, guid: 07a27a882162deb49bd2981fb9618870,
-    type: 3}
-  m_PrefabInstance: {fileID: 4597403234176197078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1154507835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1154507833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1167668700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 172294166426730529, guid: 6bb80c5842427ab48a0168080ad0f926,
@@ -2302,6 +2340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013092714}
   - component: {fileID: 2013092716}
+  - component: {fileID: 2013092717}
   m_Layer: 0
   m_Name: Cashier
   m_TagString: Untagged
@@ -2345,6 +2384,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2013092717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013092713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10b55f4f5f8b84e921b45a1244f47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2124082949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,11 +2668,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2449126632596488630, guid: eef5579f7628e10409aeb353182bfd4d,
-        type: 3}
-      propertyPath: state
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3044092476724702051, guid: eef5579f7628e10409aeb353182bfd4d,
         type: 3}
       propertyPath: m_Name
@@ -2695,11 +2741,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tray
       objectReference: {fileID: 0}
-    - target: {fileID: 2913005108464231702, guid: cf295845b5d92724c9b2ce1737fd8c2a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Tray
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2717,11 +2758,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireExtinguisher
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484401587480560054, guid: 658ba592775f6444c90c48009a0a4be9,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.15296692
       objectReference: {fileID: 0}
     - target: {fileID: 4484401587480560054, guid: 658ba592775f6444c90c48009a0a4be9,
         type: 3}
@@ -2786,6 +2822,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1642137570}
     m_Modifications:
+    - target: {fileID: 4671398634163147936, guid: 43aaa542846f11d439ff2cb2af9a273a,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671398634163147936, guid: 43aaa542846f11d439ff2cb2af9a273a,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671398634163147936, guid: 43aaa542846f11d439ff2cb2af9a273a,
+        type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671398634163147936, guid: 43aaa542846f11d439ff2cb2af9a273a,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8390532190055083369, guid: 43aaa542846f11d439ff2cb2af9a273a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2909,19 +2965,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: checkOrderButton
       objectReference: {fileID: 0}
-    - target: {fileID: 3670640954173268670, guid: 07a27a882162deb49bd2981fb9618870,
+    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
-      propertyPath: m_TagString
-      value: Button
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 471199173}
+    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CheckNPCOrder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: OrderCheckButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
+        type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3670640954173268670, guid: 07a27a882162deb49bd2981fb9618870,
+    - targetCorrespondingSourceObject: {fileID: 5784419620205776923, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1154507835}
+      addedObject: {fileID: 471199173}
   m_SourcePrefab: {fileID: 100100000, guid: 07a27a882162deb49bd2981fb9618870, type: 3}
 --- !u!1001 &8234942064366161314
 PrefabInstance:
@@ -3019,3 +3090,4 @@ SceneRoots:
   - {fileID: 1403238297}
   - {fileID: 4597403234176197078}
   - {fileID: 1141222245}
+  - {fileID: 533226364}

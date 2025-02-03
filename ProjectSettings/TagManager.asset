@@ -12,6 +12,7 @@ TagManager:
   - FridgeTopDoor
   - Tray
   - Button
+  - Food
   layers:
   - Default
   - TransparentFX

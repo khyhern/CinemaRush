@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 829c4c930d15d6049a09380e998efc6e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Food
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -148,6 +153,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2449126632596488630}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 829c4c930d15d6049a09380e998efc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2813683818245910483}
   m_SourcePrefab: {fileID: 100100000, guid: 829c4c930d15d6049a09380e998efc6e, type: 3}
 --- !u!4 &2410861033358701017 stripped
 Transform:
@@ -380,3 +389,16 @@ MonoBehaviour:
   cookDuration: 5
   burnDuration: 10
   state: 0
+--- !u!114 &2813683818245910483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044092476724702051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b00d4f20467534fab418e5363ab7e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodName: Sausage
