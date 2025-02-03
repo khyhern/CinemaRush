@@ -14,8 +14,16 @@ public class NPCOrderSystem : MonoBehaviour
     public string buttonTag = "Button";
     private Button checkOrderButton; // Changed to Button type
 
+    private NPCController npcController; // Reference to the NPCController
+
     private void Start()
     {
+        npcController = FindObjectOfType<NPCController>(); // Find the NPCController in the scene
+        if (npcController == null)
+        {
+            Debug.LogError("NPCController not found in the scene!");
+        }
+
         // Find the tray
         GameObject trayObject = GameObject.FindGameObjectWithTag(trayTag);
         if (trayObject != null)
@@ -99,5 +107,16 @@ public class NPCOrderSystem : MonoBehaviour
 
         isHappy = order == trayOrder;
         Debug.Log(isHappy ? "✅ Correct order! NPC is happy." : "❌ Wrong order! NPC is angry.");
+    }
+    public void CompleteOrder(bool isOrderCorrect)
+    {
+        if (npcController != null)
+        {
+            npcController.SetOrderStatus(isOrderCorrect);
+        }
+        else
+        {
+            Debug.LogError("NPCController reference is null!");
+        }
     }
 }

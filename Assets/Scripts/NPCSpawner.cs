@@ -11,6 +11,8 @@ public class NPCSpawner : MonoBehaviour
 
     private int currentNPCCount = 0;    // Current number of spawned NPCs
 
+    
+
 
     void Start()
     {

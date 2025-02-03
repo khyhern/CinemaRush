@@ -140,7 +140,7 @@ public class NPCController : MonoBehaviour
 
 
         // Determine which path to take (happy or angry)
-        bool isHappy = Random.value > 0.5f; // Replace with your own logic to decide path
+        bool isHappy = isOrderCompletedCorrectly; // Replace with your own logic to decide path
 
         if (isHappy)
         {
