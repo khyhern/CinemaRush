@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class NPCOrderSystem : MonoBehaviour
 {
-    public bool isHappy = false;
     public string trayTag = "Tray";
     private Transform Tray;
     private string order; // Store NPC order
@@ -108,12 +107,13 @@ public class NPCOrderSystem : MonoBehaviour
         if (order == trayOrder)
         {
             CompleteOrder(true);
+            Debug.Log("✅ Correct order! NPC is happy.");
         }
         else
         {
             CompleteOrder(false);
+            Debug.Log("❌ Wrong order! NPC is angry.");
         }
-        Debug.Log(isHappy ? "✅ Correct order! NPC is happy." : "❌ Wrong order! NPC is angry.");
     }
     public void CompleteOrder(bool isOrderCorrect)
     {
