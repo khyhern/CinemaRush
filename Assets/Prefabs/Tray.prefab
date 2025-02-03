@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2498412039424511700}
-  - component: {fileID: 2748430131123613344}
+  - component: {fileID: 5600136542586094510}
   m_Layer: 0
-  m_Name: ItemDetector
+  m_Name: TrayManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,27 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2532925260661587884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2748430131123613344
-BoxCollider:
+--- !u!114 &5600136542586094510
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724380775666081575}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.81, y: 3.41, z: 9.54}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f1e327df31e8c438a765681fead7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trayItems: []
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
 --- !u!1001 &2642622766807095367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,7 +145,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f6bdd3902dca9fa4aaa05c4305b23999,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5356225036607628516}
+      addedObject: {fileID: 2295091071100190885}
   m_SourcePrefab: {fileID: 100100000, guid: f6bdd3902dca9fa4aaa05c4305b23999, type: 3}
 --- !u!4 &2532925260661587884 stripped
 Transform:
@@ -166,8 +159,8 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2642622766807095367}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &5356225036607628516
-BoxCollider:
+--- !u!64 &2295091071100190885
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -184,6 +177,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.1269255, y: 3.8019648, z: 0.64362067}
-  m_Center: {x: -3.2858115e-17, y: 0, z: -0.02818994}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: f6bdd3902dca9fa4aaa05c4305b23999, type: 3}

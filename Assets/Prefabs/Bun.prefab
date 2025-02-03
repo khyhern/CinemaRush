@@ -90,10 +90,10 @@ MonoBehaviour:
       - m_Target: {fileID: 6927516021233863889}
         m_TargetAssemblyTypeName: BunSocketHandler, Assembly-CSharp
         m_MethodName: OnSausageInserted
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -105,10 +105,10 @@ MonoBehaviour:
       - m_Target: {fileID: 6927516021233863889}
         m_TargetAssemblyTypeName: BunSocketHandler, Assembly-CSharp
         m_MethodName: OnSausageRemoved
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

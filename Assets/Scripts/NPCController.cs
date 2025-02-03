@@ -208,4 +208,4 @@ public class NPCController : MonoBehaviour
             Debug.LogError("OrderText is not assigned in the Inspector.");
         }
     }
-    }
+}

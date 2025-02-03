@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 7095288750509466970}
   - component: {fileID: 1703698944197044410}
   - component: {fileID: 1947609105571344870}
+  - component: {fileID: 5348775570443604443}
   m_Layer: 0
   m_Name: Interactable
   m_TagString: Untagged
@@ -333,13 +334,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 5348775570443604443}
+        m_TargetAssemblyTypeName: OrderCheckButton, Assembly-CSharp
+        m_MethodName: CheckNPCOrder
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -434,3 +435,17 @@ MonoBehaviour:
   localAxis: {x: 0, y: -1, z: 0}
   resetSpeed: 5
   followAngleThreshold: 45
+--- !u!114 &5348775570443604443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5784419620205776923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1b2ad95b6b9a14fbf1247bec0920cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashierTrigger: {fileID: 0}
+  trayManager: {fileID: 0}
