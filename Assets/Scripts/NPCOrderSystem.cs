@@ -1,17 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NPCOrderSystem : MonoBehaviour
 {
     public string trayTag = "Tray";
-    private Transform Tray;
+    private Transform itemCollider; // Reference to the ItemCollider inside the tray
     private string order; // Store NPC order
-
-    [Header("UI Elements")]
-    public string buttonTag = "Button";
-    private Button checkOrderButton; // Changed to Button type
 
     private NPCController npcController; // Reference to the NPCController
 
@@ -23,42 +18,29 @@ public class NPCOrderSystem : MonoBehaviour
             Debug.LogError("NPCController not found in the scene!");
         }
 
-        // Find the tray
+        // Find the tray and then locate the ItemCollider inside it
         GameObject trayObject = GameObject.FindGameObjectWithTag(trayTag);
         if (trayObject != null)
         {
-            Tray = trayObject.transform;
+            Transform trayTransform = trayObject.transform;
+            itemCollider = trayTransform.Find("ItemCollider");
+
+            if (itemCollider == null)
+            {
+                Debug.LogError("ItemCollider not found inside the Tray! Make sure it's named correctly.");
+            }
         }
         else
         {
             Debug.LogError("Tray object not found! Make sure it's tagged correctly.");
         }
 
-        // Find the check order button
-        GameObject buttonObject = GameObject.FindGameObjectWithTag(buttonTag);
-        if (buttonObject != null)
-        {
-            checkOrderButton = buttonObject.GetComponent<Button>();
-            if (checkOrderButton != null)
-            {
-                checkOrderButton.onClick.AddListener(OnCheckOrderButtonPressed);
-            }
-            else
-            {
-                Debug.LogError("Check Order Button does not have a Button component!");
-            }
-        }
-        else
-        {
-            Debug.LogError("Button object not found! Make sure it's tagged correctly.");
-        }
-
         // Get NPC order from NPCController
         order = npcController.npcOrder;
     }
 
-    // This method gets triggered when the button is pressed
-    public void OnCheckOrderButtonPressed()
+    // This method will be called from XR Simple Interactable (SelectEntered)
+    public void CheckOrder()
     {
         if (CheckTrayForOrder())
         {
@@ -70,17 +52,17 @@ public class NPCOrderSystem : MonoBehaviour
         }
     }
 
-    // Checks if there are items on the tray
+    // Checks if there are items in the ItemCollider child of the tray
     private bool CheckTrayForOrder()
     {
-        if (Tray == null) return false;
+        if (itemCollider == null) return false;
 
-        foreach (Transform item in Tray)
+        foreach (Transform item in itemCollider)
         {
             OrderItem orderItem = item.GetComponent<OrderItem>();
             if (orderItem != null)
             {
-                Debug.Log($"Order found on tray: {orderItem.itemName}");
+                Debug.Log($"Order found in ItemCollider: {orderItem.itemName}");
                 return true;
             }
         }
@@ -88,14 +70,14 @@ public class NPCOrderSystem : MonoBehaviour
         return false;
     }
 
-    // Validates the order
+    // Validates the order by comparing items inside ItemCollider with the NPC order
     private void ValidateOrder()
     {
-        if (Tray == null) return;
+        if (itemCollider == null) return;
 
         string trayOrder = "";
 
-        foreach (Transform item in Tray)
+        foreach (Transform item in itemCollider)
         {
             OrderItem orderItem = item.GetComponent<OrderItem>();
             if (orderItem != null)
@@ -115,6 +97,7 @@ public class NPCOrderSystem : MonoBehaviour
             Debug.Log("❌ Wrong order! NPC is angry.");
         }
     }
+
     public void CompleteOrder(bool isOrderCorrect)
     {
         if (npcController != null)

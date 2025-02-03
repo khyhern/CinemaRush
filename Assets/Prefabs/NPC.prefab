@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 1731551114005850968}
   - component: {fileID: -260593742986207996}
   - component: {fileID: 8767158027777619149}
-  - component: {fileID: 5829966549705772196}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -247,24 +246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43367eeacd9c2a47a4fcd3b2a67e5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcOrder: 
   queuePointTag: QueuePoint
   happyExitTag: HappyExitPath
   angryExitTag: AngryExitPath
   moveSpeed: 3
   checkDelay: 0
   NPCorderText: {fileID: 1582871015505318050}
---- !u!114 &5829966549705772196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2165719898778860214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f99216e08226a634f836f32f7030b03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHappy: 0
-  trayTag: Tray
-  buttonTag: Button
