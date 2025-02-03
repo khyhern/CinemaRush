@@ -10,6 +10,8 @@ TagManager:
   - HappyExitPath
   - AngryExitPath
   - FridgeTopDoor
+  - Tray
+  - Button
   layers:
   - Default
   - TransparentFX

@@ -1,39 +1,103 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Profiling;
+using UnityEngine.UI;
 
 public class NPCOrderSystem : MonoBehaviour
 {
+    public bool isHappy = false;
+    public string trayTag = "Tray";
+    private Transform Tray;
+    private string order; // Store NPC order
+
     [Header("UI Elements")]
-    public TextMesh NPCorderText; // Reference to a 3D TextMesh object
+    public string buttonTag = "Button";
+    private Button checkOrderButton; // Changed to Button type
 
-    private string npcOrder;
-    private void GenerateRandomOrder()
+    private void Start()
     {
-        string[] menuItems = { "Hotdog", "Popcorn" };
-        string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
-
-        // Randomly pick a main item
-        string mainItem = menuItems[Random.Range(0, menuItems.Length)];
-
-        // 50% chance to include a soda in the order
-        bool includeSoda = Random.value > 0.5f;
-        string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
-
-        // Construct order
-        npcOrder = includeSoda ? $"{mainItem} + {soda}" : mainItem;
-
-        Debug.Log($"NPC Order: {npcOrder}");
-
-        // Update 3D TextMesh if the NPC is in the first position
-        if (NPCorderText != null)
+        // Find the tray
+        GameObject trayObject = GameObject.FindGameObjectWithTag(trayTag);
+        if (trayObject != null)
         {
-            NPCorderText.text = npcOrder;
+            Tray = trayObject.transform;
         }
         else
         {
-            Debug.LogError("OrderText is not assigned in the Inspector.");
+            Debug.LogError("Tray object not found! Make sure it's tagged correctly.");
         }
+
+        // Find the check order button
+        GameObject buttonObject = GameObject.FindGameObjectWithTag(buttonTag);
+        if (buttonObject != null)
+        {
+            checkOrderButton = buttonObject.GetComponent<Button>();
+            if (checkOrderButton != null)
+            {
+                checkOrderButton.onClick.AddListener(OnCheckOrderButtonPressed);
+            }
+            else
+            {
+                Debug.LogError("Check Order Button does not have a Button component!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Button object not found! Make sure it's tagged correctly.");
+        }
+
+        // Get NPC order from NPCController
+        order = NPCController.Instance.npcOrder;
+    }
+
+    // This method gets triggered when the button is pressed
+    public void OnCheckOrderButtonPressed()
+    {
+        if (CheckTrayForOrder())
+        {
+            ValidateOrder();
+        }
+        else
+        {
+            Debug.Log("No valid order found on the tray.");
+        }
+    }
+
+    // Checks if there are items on the tray
+    private bool CheckTrayForOrder()
+    {
+        if (Tray == null) return false;
+
+        foreach (Transform item in Tray)
+        {
+            OrderItem orderItem = item.GetComponent<OrderItem>();
+            if (orderItem != null)
+            {
+                Debug.Log($"Order found on tray: {orderItem.itemName}");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Validates the order
+    private void ValidateOrder()
+    {
+        if (Tray == null) return;
+
+        string trayOrder = "";
+
+        foreach (Transform item in Tray)
+        {
+            OrderItem orderItem = item.GetComponent<OrderItem>();
+            if (orderItem != null)
+            {
+                trayOrder += trayOrder == "" ? orderItem.itemName : $" + {orderItem.itemName}";
+            }
+        }
+
+        isHappy = order == trayOrder;
+        Debug.Log(isHappy ? "✅ Correct order! NPC is happy." : "❌ Wrong order! NPC is angry.");
     }
 }

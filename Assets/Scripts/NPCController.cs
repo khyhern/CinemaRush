@@ -5,6 +5,21 @@ using UnityEngine.Profiling;
 
 public class NPCController : MonoBehaviour
 {
+    public static NPCController Instance { get; private set; }
+    public string npcOrder { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [Header("QueuePoints Settings")]
     public string queuePointTag = "QueuePoint"; // Tag to identify queue points in the scene
     public string happyExitTag = "HappyExitPath"; // Tag to identify happyExit waypoints in the scene
@@ -24,8 +39,6 @@ public class NPCController : MonoBehaviour
     private NPCSpawner spawner; // Reference to the NPCSpawner
 
     private bool isOrderCompletedCorrectly = false; // Tracks if the order was completed correctly
-
-    private string npcOrder;
 
     public TextMesh NPCorderText;
 
