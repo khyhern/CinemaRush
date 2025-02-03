@@ -6,20 +6,6 @@ public class Bun : MonoBehaviour
     private CookSausage insertedSausage; // Reference to the sausage inside the bun
     public GameObject Hotdog; // The final hotdog prefab to spawn if conditions are met
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if a sausage is inserted
-        CookSausage sausage = other.GetComponent<CookSausage>();
-        if (sausage != null && insertedSausage == null) // Only one sausage allowed
-        {
-            insertedSausage = sausage;
-            insertedSausage.transform.SetParent(Socket); // Attach to bun
-            insertedSausage.transform.localPosition = Vector3.zero; // Align position
-            insertedSausage.transform.localRotation = Quaternion.identity;
-
-            CheckForHotdog();
-        }
-    }
 
     private void CheckForHotdog()
     {

@@ -57,17 +57,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 829c4c930d15d6049a09380e998efc6e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59395075
+      value: 1.0617507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 829c4c930d15d6049a09380e998efc6e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8717191
+      value: 1.4641662
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 829c4c930d15d6049a09380e998efc6e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.37104857
+      value: -0.34363508
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 829c4c930d15d6049a09380e998efc6e,
         type: 3}
@@ -379,3 +379,4 @@ MonoBehaviour:
   burntMaterial: {fileID: 2100000, guid: fed9f34f1315ee9479b25820d6ff848b, type: 2}
   cookDuration: 5
   burnDuration: 10
+  state: 0
