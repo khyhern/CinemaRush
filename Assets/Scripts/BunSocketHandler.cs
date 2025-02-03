@@ -27,6 +27,9 @@ public class BunSocketHandler : MonoBehaviour
 
             if (sausage != null && bun != null)
             {
+                // Change the sausage tag to "CombinedFood" so it doesn't count separately in tray
+                insertedObject.tag = "CombinedFood";
+
                 // Check the state of the sausage and update the bun's name
                 switch (sausage.state)
                 {
@@ -36,7 +39,7 @@ public class BunSocketHandler : MonoBehaviour
                         break;
 
                     case CookSausage.SausageState.Cooked:
-                        bun.ChangeFoodName("Cooked Hotdog");
+                        bun.ChangeFoodName("Hotdog");
                         Debug.Log("Cooked Sausage inserted! Bun is now a Cooked Hotdog.");
                         break;
 
@@ -52,6 +55,14 @@ public class BunSocketHandler : MonoBehaviour
     // Called when a sausage is removed from the socket
     public void OnSausageRemoved(SelectExitEventArgs args)
     {
+        GameObject removedObject = args.interactableObject.transform.gameObject;
+
+        if (removedObject.CompareTag("CombinedFood")) // Ensure we are dealing with a previously inserted sausage
+        {
+            removedObject.tag = "Food"; // Reset tag back to "Food"
+            Debug.Log("Sausage removed from bun, tag reset to Food.");
+        }
+
         if (bun != null)
         {
             bun.ChangeFoodName("Bun"); // Reset to Bun if sausage is removed

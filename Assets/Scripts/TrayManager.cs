@@ -32,22 +32,23 @@ public class TrayManager : MonoBehaviour
         }
     }
 
-    // Method to delete all food objects in the tray
+    // Method to delete all food objects in the tray (both "Food" and "CombinedFood")
     public void ClearTray()
     {
         Collider[] foodColliders = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity);
 
         foreach (Collider collider in foodColliders)
         {
-            if (collider.CompareTag("Food"))
+            if (collider.CompareTag("Food") || collider.CompareTag("CombinedFood")) // Delete both types
             {
                 Debug.Log("Removing: " + collider.gameObject.name);
-                Destroy(collider.gameObject); // Destroy all food items
+                Destroy(collider.gameObject); // Destroy all food and combined food items
             }
         }
 
         trayItems.Clear(); // Clear the stored food list
     }
+
 
     // Method to get the finalized tray contents
     public List<string> GetFinalizedTrayItems()
