@@ -7,6 +7,18 @@ public class Bun : MonoBehaviour
     public GameObject Hotdog; // The final hotdog prefab to spawn if conditions are met
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if a sausage is inserted
+        CookSausage sausage = other.GetComponent<CookSausage>();
+        if (sausage != null && insertedSausage == null) // Only one sausage allowed
+        {
+            insertedSausage = sausage;
+
+            CheckForHotdog();
+        }
+    }
+
     private void CheckForHotdog()
     {
         if (insertedSausage != null && insertedSausage.state == CookSausage.SausageState.Cooked)
