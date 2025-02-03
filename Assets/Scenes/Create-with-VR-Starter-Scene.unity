@@ -2160,7 +2160,7 @@ PrefabInstance:
     - target: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59395075
+      value: -0.595
       objectReference: {fileID: 0}
     - target: {fileID: 2410861033358701017, guid: eef5579f7628e10409aeb353182bfd4d,
         type: 3}
@@ -2749,7 +2749,7 @@ PrefabInstance:
     - target: {fileID: 8390532190055083369, guid: 43aaa542846f11d439ff2cb2af9a273a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.469
+      value: -0.671
       objectReference: {fileID: 0}
     - target: {fileID: 8390532190055083369, guid: 43aaa542846f11d439ff2cb2af9a273a,
         type: 3}
@@ -2867,7 +2867,7 @@ PrefabInstance:
     - target: {fileID: 3670640954173268670, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
       propertyPath: m_Name
-      value: checkOrderButton
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 5348775570443604443, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
