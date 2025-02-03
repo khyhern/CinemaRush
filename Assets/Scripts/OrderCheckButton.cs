@@ -42,6 +42,7 @@ public class OrderCheckButton : MonoBehaviour
             {
                 Debug.Log("? Order is correct! NPC is happy.");
                 currentNPC.SetOrderStatus(true); // NPC processes and leaves
+                trayManager.ClearTray(); // Remove all food from the tray
             }
             else
             {

@@ -261,12 +261,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1526651205}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &253176610 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2913005108464231702, guid: cf295845b5d92724c9b2ce1737fd8c2a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1281067596867403371}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &269756447
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,26 +597,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &471199171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5784419620205776923, guid: 07a27a882162deb49bd2981fb9618870,
-    type: 3}
-  m_PrefabInstance: {fileID: 4597403234176197078}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &471199173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471199171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1b2ad95b6b9a14fbf1247bec0920cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cashierTrigger: {fileID: 2013092717}
-  trayManager: {fileID: 61928071}
 --- !u!1001 &526042993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1149,28 +1123,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1281067596867403371}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1315527784
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253176610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: f6bdd3902dca9fa4aaa05c4305b23999, type: 3}
 --- !u!1 &1389852509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1419,7 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.38
+      value: -2.823
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -1477,12 +1429,12 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.06
+      value: -2.025
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -1492,7 +1444,7 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -1507,7 +1459,7 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
@@ -2713,15 +2665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tray
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5356225036607628516, guid: cf295845b5d92724c9b2ce1737fd8c2a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2913005108464231702, guid: cf295845b5d92724c9b2ce1737fd8c2a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1315527784}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf295845b5d92724c9b2ce1737fd8c2a, type: 3}
 --- !u!1001 &3404690522061984214
 PrefabInstance:
@@ -2922,34 +2869,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: checkOrderButton
       objectReference: {fileID: 0}
-    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
+    - target: {fileID: 5348775570443604443, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: trayManager
       value: 
-      objectReference: {fileID: 471199173}
-    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
+      objectReference: {fileID: 61928071}
+    - target: {fileID: 5348775570443604443, guid: 07a27a882162deb49bd2981fb9618870,
         type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CheckNPCOrder
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: OrderCheckButton, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7095288750509466970, guid: 07a27a882162deb49bd2981fb9618870,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      propertyPath: cashierTrigger
+      value: 
+      objectReference: {fileID: 2013092717}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5784419620205776923, guid: 07a27a882162deb49bd2981fb9618870,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 471199173}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07a27a882162deb49bd2981fb9618870, type: 3}
 --- !u!1001 &8234942064366161314
 PrefabInstance:

@@ -183,7 +183,7 @@ public class NPCController : MonoBehaviour
     }
     private void GenerateRandomOrder()
     {
-        string[] menuItems = { "Hotdog", "Popcorn" };
+        string[] menuItems = { "Bun", "Sausage", "Hotdog", "Popcorn" };
         string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
 
         // Randomly pick a main item
