@@ -769,13 +769,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294467287}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -10.617878, y: -4.9740205, z: -18.061764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 950325255}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1294467289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,8 +788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423a2ce2dfa216f4faafc7254ce41670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 2165719898778860214, guid: c78c966beed465f46b805bbfb97927ba,
-    type: 3}
+  npcPrefabs:
+  - {fileID: 8911410609789204078, guid: db1572a7e18950f41812e7bdadff43b4, type: 3}
+  - {fileID: 4763584460791529628, guid: 21601eae5aa7872408c08cb380ee8285, type: 3}
   spawnPoint: {fileID: 1294467288}
   spawnInterval: 2
   maxNPCs: 5
@@ -1317,7 +1318,7 @@ Transform:
   m_GameObject: {fileID: 1701910898}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4578774, y: -4.9740205, z: -11.631763}
+  m_LocalPosition: {x: -3.84, y: -4.9740205, z: -11.631763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
