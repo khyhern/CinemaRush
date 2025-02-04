@@ -23,6 +23,8 @@ public class OrderCheckButton : MonoBehaviour
 
         if (currentNPC != null)
         {
+            Debug.Log($"Checking order for NPC: {currentNPC.name}");
+
             string npcOrderString = currentNPC.npcOrder; // Retrieve the NPC's order as a string
             List<string> npcOrderList = new List<string>(npcOrderString.Split('+'));
 
@@ -51,7 +53,7 @@ public class OrderCheckButton : MonoBehaviour
         }
         else
         {
-            Debug.Log("No NPC at the Cashier.");
+            Debug.LogError("No NPC at the Cashier. Check if NPC entered the trigger.");
         }
     }
 }

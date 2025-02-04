@@ -8,7 +8,13 @@ public class CashierTrigger : MonoBehaviour
     {
         if (other.CompareTag("NPC"))
         {
+            Debug.Log($"NPC {other.name} entered the cashier trigger!");
             currentNPC = other.GetComponent<NPCController>();
+
+            if (currentNPC == null)
+            {
+                Debug.LogError($"NPC {other.name} is missing NPCController script!");
+            }
         }
     }
 
@@ -16,6 +22,7 @@ public class CashierTrigger : MonoBehaviour
     {
         if (other.CompareTag("NPC"))
         {
+            Debug.Log($"NPC {other.name} exited the cashier trigger.");
             currentNPC = null;
         }
     }
