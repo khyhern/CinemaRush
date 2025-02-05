@@ -190,7 +190,8 @@ public class NPCController : MonoBehaviour
         string mainItem = menuItems[Random.Range(0, menuItems.Length)];
 
         // 50% chance to include a soda in the order
-        bool includeSoda = false; // Random.value > 0.5f;
+        //bool includeSoda = false; // Random.value > 0.5f;
+        bool includeSoda = Random.value > 0.5f;
         string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
 
         // Construct order
