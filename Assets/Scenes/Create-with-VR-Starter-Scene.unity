@@ -2454,6 +2454,16 @@ PrefabInstance:
       propertyPath: cashierTrigger
       value: 
       objectReference: {fileID: 2013092717}
+    - target: {fileID: 3484271240430550689, guid: 46c30bd0dfe6c1442b0bf6395dcaeb05,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7516552392122860852, guid: 46c30bd0dfe6c1442b0bf6395dcaeb05,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8159863633192530600, guid: 46c30bd0dfe6c1442b0bf6395dcaeb05,
         type: 3}
       propertyPath: m_Name
