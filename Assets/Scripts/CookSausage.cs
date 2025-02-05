@@ -14,6 +14,9 @@ public class CookSausage : MonoBehaviour
 
     private FryingPan fryingPan; // Reference to the frying pan script
 
+    public enum SausageState { Raw, Cooked, Burnt }
+    public SausageState state; // Assign state in Inspector or change dynamically
+
     private void Start()
     {
         state = SausageState.Raw;
@@ -81,16 +84,13 @@ public class CookSausage : MonoBehaviour
         }
     }
 
-    public enum SausageState { Raw, Cooked, Burnt }
-    public SausageState state; // Assign state in Inspector or change dynamically
-
     private void CookSausageFully()
     {
         if (!isCooked && !isBurnt) // Only cook if not burnt
         {
             isCooked = true;
-            Debug.Log("Sausage is cooked!");
             state = SausageState.Cooked;
+            Debug.Log("Sausage is cooked!");
 
             // Change the sausage's material to the cooked material
             if (cookedMaterial != null)
@@ -101,6 +101,9 @@ public class CookSausage : MonoBehaviour
             {
                 Debug.LogWarning("Cooked material is not assigned!");
             }
+
+            // Change the tag to "Food" when cooked
+            gameObject.tag = "Food";
         }
     }
 
@@ -123,6 +126,9 @@ public class CookSausage : MonoBehaviour
             Debug.LogWarning("Burnt material is not assigned!");
         }
 
+        // Change the tag back to "Untagged" when burnt
+        gameObject.tag = "Untagged";
+
         // Notify the frying pan that this burnt sausage is now in it
         if (fryingPan != null)
         {
@@ -136,6 +142,5 @@ public class CookSausage : MonoBehaviour
         {
             fryingPan.AddBurntSausage(gameObject); // Re-register the burnt sausage after pan reset
         }
-
     }
 }
