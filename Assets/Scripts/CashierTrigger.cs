@@ -16,6 +16,15 @@ public class CashierTrigger : MonoBehaviour
                 Debug.LogError($"NPC {other.name} is missing NPCController script!");
             }
         }
+
+        if(other.name == "MaleA(Clone)")
+        {
+            SoundManager.Instance.PlayOneShot("order customer 1");
+        }
+        else if(other.name == "FemaleA(Clone)")
+        {
+            SoundManager.Instance.PlayOneShot("order customer 2");
+        }
     }
 
     private void OnTriggerExit(Collider other)
