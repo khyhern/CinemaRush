@@ -1,63 +1,114 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CupSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public Transform spawnPoint;  // The point where prefabs will spawn
-    public GameObject prefab1;    // First prefab to spawn
-    public float spawnCooldown = 3f;  // Cooldown before respawning
+    [Tooltip("Cup Prefab to spawn")]
+    public GameObject cupPrefab;
 
-    private GameObject currentPrefab;  // Tracks the last spawned prefab
-    private bool isSpawning = false;   // Prevents multiple spawns during cooldown
+    [Tooltip("Lid Prefab to spawn")]
+    public GameObject lidPrefab;
+
+    [Tooltip("Transform at which to spawn the cup and lid")]
+    public Transform spawnPoint; // Reference to spawn point (Transform)
+
+    [Tooltip("Offset for the lid relative to the cup")]
+    public Vector3 lidOffset = new Vector3(0, 0.1f, 0);
+
+    [Tooltip("Cooldown time (in seconds) after a spawn")]
+    public float cooldownTime = 0.1f;
+
+    private bool isOnCooldown = false;
+    private HashSet<GameObject> sodaObjects = new HashSet<GameObject>(); // Track "Soda" objects
 
     private void Start()
     {
-        SpawnPrefabs(); // Initial spawn
+        SpawnInitialObjects();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void SpawnInitialObjects()
     {
-        // Check if the detected object is the currently spawned prefab
-        if (currentPrefab != null && other.gameObject == currentPrefab)
+        if (!isOnCooldown && sodaObjects.Count == 0 && spawnPoint != null)
         {
-            // The prefab is still in the trigger area, no need to spawn a new one
-            return;
+            SpawnCupAndLid();
+            StartCoroutine(CooldownRoutine());
+        }
+        else
+        {
+            if (spawnPoint == null)
+            {
+                Debug.LogWarning("Spawn Point is not assigned.");
+            }
+            else
+            {
+                Debug.LogWarning("Cooldown active or Soda object detected.");
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Soda"))
+        {
+            sodaObjects.Add(other.gameObject);
+            Debug.Log($"Soda entered: {other.name}. Total: {sodaObjects.Count}");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Check if the leaving object is the currently spawned prefab
-        if (currentPrefab != null && other.gameObject == currentPrefab)
+        if (sodaObjects.Contains(other.gameObject))
         {
-            // Start the cooldown before spawning a new one
-            if (!isSpawning)
+            sodaObjects.Remove(other.gameObject);
+            Debug.Log($"Soda exited: {other.name}. Remaining: {sodaObjects.Count}");
+
+            if (sodaObjects.Count == 0 && !isOnCooldown)
             {
-                StartCoroutine(SpawnWithCooldown());
+                SpawnCupAndLid();
             }
         }
     }
 
-    private void SpawnPrefabs()
+    private void SpawnCupAndLid()
     {
-        if (spawnPoint == null || prefab1 == null)
+        if (cupPrefab != null && spawnPoint != null)
         {
-            Debug.LogWarning("Spawn settings are not assigned properly!");
-            return;
+            // Spawn the cup with a specific rotation to correct the -90 degree issue
+            Instantiate(cupPrefab, spawnPoint.position, Quaternion.Euler(-90, 0, 0)); // Adjust rotation if needed
+            Debug.Log("Spawned Cup at: " + spawnPoint.position);
+        }
+        else
+        {
+            if (cupPrefab == null)
+                Debug.LogWarning("Cup Prefab is not assigned.");
+            if (spawnPoint == null)
+                Debug.LogWarning("Spawn Point is not assigned.");
         }
 
-        // Spawn first prefab
-        currentPrefab = Instantiate(prefab1, spawnPoint.position, spawnPoint.rotation);
+        if (lidPrefab != null && spawnPoint != null)
+        {
+            // Spawn the lid with the same rotation to match the cup
+            Instantiate(lidPrefab, spawnPoint.position + lidOffset, Quaternion.Euler(-90, 0, 0)); // Offset cup spawn rotation
+            Debug.Log("Spawned Lid at: " + (spawnPoint.position + lidOffset));
+        }
+        else
+        {
+            if (lidPrefab == null)
+                Debug.LogWarning("Lid Prefab is not assigned.");
+            if (spawnPoint == null)
+                Debug.LogWarning("Spawn Point is not assigned.");
+        }
 
+        StartCoroutine(CooldownRoutine());
     }
 
 
-    private IEnumerator SpawnWithCooldown()
+    private IEnumerator CooldownRoutine()
     {
-        isSpawning = true;
-        yield return new WaitForSeconds(spawnCooldown);
-        SpawnPrefabs();
-        isSpawning = false;
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        isOnCooldown = false;
     }
 }

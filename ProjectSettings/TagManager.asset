@@ -14,6 +14,7 @@ TagManager:
   - Button
   - Food
   - CombinedFood
+  - PopcornBucket
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Sausage
   - Soda
   - SodaFill
-  - 
-  - 
+  - Popcorn
+  - PopcornFill
   - 
   - 
   - 

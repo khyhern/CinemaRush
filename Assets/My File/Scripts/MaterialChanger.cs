@@ -10,8 +10,8 @@ public class MaterialChangeOnContact : MonoBehaviour
     public int objectCount = 10;            // Total number of objects to reveal
 
     private Collider detectorCollider;      // Reference to this GameObject's collider (should be a trigger)
-    private int sodaLayer;                  // Layer index for the "Soda" layer
-    private int sodaFillLayer;              // Layer index for the "SodaFill" layer
+    public int sodaLayer;                  // Layer index for the "Soda" layer
+    public int sodaFillLayer;              // Layer index for the "SodaFill" layer
 
     public string changeSodaName;
 
