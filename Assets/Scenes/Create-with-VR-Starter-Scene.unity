@@ -452,10 +452,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1226028499}
     m_Modifications:
+    - target: {fileID: 1236131110755371316, guid: e0bf533e4b275404f814ed7ffa9d15c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1899057312658679682, guid: e0bf533e4b275404f814ed7ffa9d15c7,
         type: 3}
       propertyPath: m_Name
       value: PopcornBucket
+      objectReference: {fileID: 0}
+    - target: {fileID: 7181946307130827469, guid: e0bf533e4b275404f814ed7ffa9d15c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7223754257731401404, guid: e0bf533e4b275404f814ed7ffa9d15c7,
         type: 3}
@@ -3212,7 +3222,7 @@ PrefabInstance:
     - target: {fileID: 3347016669070837597, guid: 1adf7d1e79802d74193b468575677ff8,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3347016669070837597, guid: 1adf7d1e79802d74193b468575677ff8,
         type: 3}
