@@ -9,6 +9,7 @@ public class OrderCheckButton : MonoBehaviour
     // Method to check the NPC order when the button is pressed
     public void CheckNPCOrder()
     {
+        SoundManager.Instance.PlayOneShot("btnpress");
         if (cashierTrigger == null || trayManager == null)
         {
             Debug.LogError("CashierTrigger or TrayManager reference is missing!");

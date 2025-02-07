@@ -70,6 +70,7 @@ public class FillCup : MonoBehaviour
         {
             liquidEffect.transform.position = liquidSocket.position;
             liquidEffect.Play();
+            SoundManager.Instance.PlayBGMusic("drink");
         }
 
         // Wait for the fill duration
@@ -79,6 +80,7 @@ public class FillCup : MonoBehaviour
         if (liquidEffect != null)
         {
             liquidEffect.Stop();
+            SoundManager.Instance.StopBGMMusic();
         }
 
         // Unlock the cup

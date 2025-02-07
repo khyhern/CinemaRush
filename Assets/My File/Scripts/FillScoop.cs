@@ -25,6 +25,7 @@ public class FillScoop : MonoBehaviour
 
         if (scoopFillMeshTransform != null)
         {
+            SoundManager.Instance.PlayOneShot("popcorn fill");
             Renderer renderer = scoopFillMeshTransform.GetComponent<Renderer>();
 
             if (renderer != null)

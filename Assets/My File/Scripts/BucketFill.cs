@@ -9,6 +9,7 @@ public class BucketFill : MonoBehaviour
         // Check if the object is named "ScoopCollider"
         if (other.gameObject.name == "ScoopCollider")
         {
+            SoundManager.Instance.PlayOneShot("popcorn fill");
             Debug.Log($"FillDetector collided with {other.name}");
 
             // Find 'scoop_fill_mesh' under 'ScoopCollider'
@@ -83,6 +84,7 @@ public class BucketFill : MonoBehaviour
 
     private void UpdatePopcornBucket(GameObject popcornBucket)
     {
+        SoundManager.Instance.PlayOneShot("popcorn done");
         // Change the tag of PopcornBucket itself
         popcornBucket.tag = "Food";
 
