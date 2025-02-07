@@ -34,16 +34,19 @@ public class BunSocketHandler : MonoBehaviour
                 switch (sausage.state)
                 {
                     case CookSausage.SausageState.Raw:
+                        SoundManager.Instance.PlayOneShot("sausage in bun");
                         bun.ChangeFoodName("Raw Hotdog");
                         Debug.Log("Raw Sausage inserted! Bun is now a Raw Hotdog.");
                         break;
 
                     case CookSausage.SausageState.Cooked:
+                        SoundManager.Instance.PlayOneShot("sausage in bun");
                         bun.ChangeFoodName("Hotdog");
                         Debug.Log("Cooked Sausage inserted! Bun is now a Cooked Hotdog.");
                         break;
 
                     case CookSausage.SausageState.Burnt:
+                        SoundManager.Instance.PlayOneShot("sausage in bun");
                         bun.ChangeFoodName("Burnt Hotdog");
                         Debug.Log("Burnt Sausage inserted! Bun is now a Burnt Hotdog.");
                         break;

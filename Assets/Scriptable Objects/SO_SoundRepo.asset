@@ -12,5 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84def0c8488db5e41a82dee32dad5d84, type: 3}
   m_Name: SO_SoundRepo
   m_EditorClassIdentifier: 
-  SoundList: []
+  SoundList:
+  - SoundName: burn
+    Clip: {fileID: 8300000, guid: df99a09e3ad88d74cb0078487846c28a, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: drink
+    Clip: {fileID: 8300000, guid: eab1f04fc344e084db75a75482e7e7fa, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: fire
+    Clip: {fileID: 8300000, guid: 8cb60463eb1efc54593dd8141ff63c46, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: popcorn done
+    Clip: {fileID: 8300000, guid: e733dc3367e99b840bb5f85686d4970f, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: popcorn fill
+    Clip: {fileID: 8300000, guid: 657a2af69dd7bca40b76f8f481496f18, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: sausage in bun
+    Clip: {fileID: 8300000, guid: a4a2abfefd8244845a67110c48ae0c3e, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: sausage done
+    Clip: {fileID: 8300000, guid: a48199056ed9b334ba140bb39387f72e, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
+  - SoundName: sold
+    Clip: {fileID: 8300000, guid: ba6ded14573d3a648843281646ab569a, type: 3}
+    AttachedParent: {fileID: 0}
+    Volume: 1
+    SpatialBlend: 0
+    Pitch: 1
   BGMList: []
