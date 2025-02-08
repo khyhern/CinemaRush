@@ -1,6 +1,110 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit;
+
+public class ButtonVR : MonoBehaviour
+{
+    [Header("Button Settings")]
+    public GameObject button;               // The visual button GameObject to move when pressed
+    public UnityEvent onPress;              // Event to invoke on press
+    public UnityEvent onRelease;            // Event to invoke on release
+
+    [Header("References")]
+    public CupDetector cupDetector;  // Reference to SocketDetector script
+    public Transform socketPoint;           // The socket where the object should be attached
+    public ParticleSystem effect;           // The effect to play during the 7 seconds
+    public Collider targetCollider;         // The collider to turn on for 7 seconds
+
+    [Header("Audio")]
+    public AudioSource clickSoundEffect;    // Sound for button press
+    public AudioSource SoundEffect;      // Sound to play AFTER the effect ends
+
+    private bool isPressed;
+
+    // Positions for button pressed and released
+    private Vector3 pressedPosition = new Vector3(0, 0.003f, 0);
+    private Vector3 releasedPosition = new Vector3(0, 0.015f, 0);
+
+    private void Start()
+    {
+        isPressed = false;
+        if (targetCollider != null)
+            targetCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "VR_Hand_Yellow" && !isPressed)
+        {
+            if (cupDetector != null && cupDetector.IsCupInSocket()) // Check if NEWSodaCup is in socket
+            {
+                StartCoroutine(ButtonPressedRoutine());
+            }
+            else
+            {
+                Debug.Log("NEWSodaCup is not in the socket. Button will not activate.");
+            }
+        }
+    }
+
+    private IEnumerator ButtonPressedRoutine()
+    {
+        isPressed = true;
+
+        // Move button to pressed position
+        button.transform.localPosition = pressedPosition;
+
+        // Play button press sound
+        onPress.Invoke();
+        if (clickSoundEffect != null)
+            clickSoundEffect.Play();
+
+        // Play the effect
+        if (effect != null)
+        {
+            effect.Play();
+            // Play sound effect 
+            if (SoundEffect != null)
+            {
+                SoundEffect.Play();
+            }
+        }
+
+        // Enable the referenced collider
+        if (targetCollider != null)
+        {
+            targetCollider.enabled = true;
+        }
+
+        // Wait for 7 seconds while the effect plays
+        yield return new WaitForSeconds(7f);
+
+        // Stop the effect
+        if (effect != null)
+        {
+            effect.Stop();
+        }
+
+
+        // Move button back to released position and disable collider
+        button.transform.localPosition = releasedPosition;
+        onRelease.Invoke();
+
+        if (targetCollider != null)
+        {
+            targetCollider.enabled = false;
+        }
+
+        isPressed = false;
+    }
+}
+
+
+/*
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;  // Needed for XRGrabInteractable
 
 public class ButtonVR : MonoBehaviour
@@ -16,6 +120,8 @@ public class ButtonVR : MonoBehaviour
     public Collider targetCollider;         // The collider to turn on for 7 seconds
 
     private AudioSource clickSoundEffect;   // Audio source for the click sound
+    public AudioSource SoundEffect;      // Sound to play AFTER the effect ends
+
     private bool isPressed;
 
     // Positions for button pressed and released (adjust as needed)
@@ -38,7 +144,9 @@ public class ButtonVR : MonoBehaviour
         if (!isPressed)
         {
             // Check if there is an object attached to the socket
-            if (socketPoint.childCount > 0)
+            //if (socketPoint.childCount > 0)
+            if (other.gameObject.name == "NEWSodaCup") // Check if NEWSodaCup collides
+
             {
                 // Proceed with the sequence only if an object is attached.
                 StartCoroutine(ButtonPressedRoutine());
@@ -64,10 +172,14 @@ public class ButtonVR : MonoBehaviour
             clickSoundEffect.Play();
 
 
-        // Play the effect if assigned
         if (effect != null)
         {
             effect.Play();
+            // Play sound effect 
+            if (SoundEffect != null)
+            {
+                SoundEffect.Play();
+            }
         }
 
         // Enable the referenced collider (e.g., a capsule collider on the mesh)
@@ -97,56 +209,6 @@ public class ButtonVR : MonoBehaviour
         // Reset the button state
         isPressed = false;
 
-    }
-}
-
-
-/*
-public class ButtonVR : MonoBehaviour
-{
-    public GameObject button;
-    public UnityEvent onPress; 
-    public UnityEvent onRelease;
-    GameObject presser;
-    AudioSource clickSoundEffect;
-    bool isPressed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        clickSoundEffect = GetComponent<AudioSource>();
-        isPressed = false;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isPressed)
-        {
-            button.transform.localPosition = new Vector3(0, 0.003f, 0);
-            presser = other.gameObject;
-            onPress.Invoke();
-            clickSoundEffect.Play();
-            isPressed = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject == presser)
-        {
-            button.transform.localPosition = new Vector3(0, 0.015f, 0);
-            onRelease.Invoke();
-            isPressed = false;
-        }
-    }
-
-    // Test. Can delete after or change to other fucntions like dispensing soda. 
-    public void SpawnSphere()
-    {
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        sphere.transform.localPosition = new Vector3(0,1,2);
-        sphere.AddComponent<Rigidbody>();
     }
 }
 */

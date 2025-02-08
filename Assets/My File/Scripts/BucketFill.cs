@@ -3,13 +3,14 @@ using UnityEngine;
 public class BucketFill : MonoBehaviour
 {
     private bool firstFillComplete = false; // Tracks if bucket_fill_mesh1 has been filled
+    public AudioSource fillSoundEffect;      // Sound to play AFTER the effect ends
+
 
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object is named "ScoopCollider"
         if (other.gameObject.name == "ScoopCollider")
         {
-            SoundManager.Instance.PlayOneShot("popcorn fill");
             Debug.Log($"FillDetector collided with {other.name}");
 
             // Find 'scoop_fill_mesh' under 'ScoopCollider'
@@ -27,10 +28,12 @@ public class BucketFill : MonoBehaviour
                     {
                         FillBucket("bucket_fill_mesh1");
                         firstFillComplete = true; // Mark first fill complete
+                        fillSoundEffect.Play();
                     }
                     else
                     {
                         FillBucket("bucket_fill_mesh2");
+                        fillSoundEffect.Play();
 
                         // Find the 'PopcornBucket' in the scene
                         GameObject popcornBucket = GameObject.Find("PopcornBucket");
@@ -84,7 +87,6 @@ public class BucketFill : MonoBehaviour
 
     private void UpdatePopcornBucket(GameObject popcornBucket)
     {
-        SoundManager.Instance.PlayOneShot("popcorn done");
         // Change the tag of PopcornBucket itself
         popcornBucket.tag = "Food";
 
