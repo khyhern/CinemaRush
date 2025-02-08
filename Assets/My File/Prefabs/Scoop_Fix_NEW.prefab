@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3473199902523858142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268274, y: -2.3432561e-17, z: 0.9238798, w: -5.6571325e-17}
+  m_LocalRotation: {x: -0.38268343, y: 0, z: -0.92387956, w: 0}
   m_LocalPosition: {x: -3.62, y: 1.5918655, z: -8.69}
   m_LocalScale: {x: -0.110010356, y: -0.14163545, z: -0.29549837}
   m_ConstrainProportionsScale: 0
@@ -381,8 +381,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6922793697723135513, guid: f182645aa3037d545b95df7c4447686a, type: 3}
-  - {fileID: -6629797300637803691, guid: f182645aa3037d545b95df7c4447686a, type: 3}
+  - {fileID: -3846018093981099296, guid: f182645aa3037d545b95df7c4447686a, type: 3}
+  - {fileID: 4874126678125670354, guid: f182645aa3037d545b95df7c4447686a, type: 3}
   - {fileID: -3846018093981099296, guid: f182645aa3037d545b95df7c4447686a, type: 3}
   - {fileID: 4874126678125670354, guid: f182645aa3037d545b95df7c4447686a, type: 3}
   - {fileID: -3522955778539423533, guid: f182645aa3037d545b95df7c4447686a, type: 3}

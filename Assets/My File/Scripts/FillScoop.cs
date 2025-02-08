@@ -5,6 +5,7 @@ public class FillScoop : MonoBehaviour
 {
     [Header("Material Settings")]
     public float revealDelay = 0.2f; // Time delay between revealing each mesh
+    public AudioSource scoopFillSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +33,7 @@ public class FillScoop : MonoBehaviour
                 // Enable the mesh renderer
                 renderer.enabled = true;
                 Debug.Log($"Revealed {scoopFillMeshTransform.name}");
+                scoopFillSound.Play();
             }
             else
             {

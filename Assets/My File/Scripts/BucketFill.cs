@@ -3,6 +3,8 @@ using UnityEngine;
 public class BucketFill : MonoBehaviour
 {
     private bool firstFillComplete = false; // Tracks if bucket_fill_mesh1 has been filled
+    public AudioSource fillSoundEffect;      // Sound to play AFTER the effect ends
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,10 +28,12 @@ public class BucketFill : MonoBehaviour
                     {
                         FillBucket("bucket_fill_mesh1");
                         firstFillComplete = true; // Mark first fill complete
+                        fillSoundEffect.Play();
                     }
                     else
                     {
                         FillBucket("bucket_fill_mesh2");
+                        fillSoundEffect.Play();
 
                         // Find the 'PopcornBucket' in the scene
                         GameObject popcornBucket = GameObject.Find("PopcornBucket");
