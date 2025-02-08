@@ -29,7 +29,7 @@ public class BucketGenerator : MonoBehaviour
     {
         if (prefabToSpawn != null)
         {
-            currentObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.Euler(-90,0,0));
+            currentObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.Euler(90,0,180));
             Debug.Log("Initial object spawned: " + currentObject.name);
             StartCoroutine(IgnoreTriggerRoutine());
         }
@@ -77,7 +77,7 @@ public class BucketGenerator : MonoBehaviour
         {
             if (!isOnCooldown)
             {
-                Instantiate(prefabToSpawn, spawnPosition, Quaternion.Euler(-90,0,0));
+                Instantiate(prefabToSpawn, spawnPosition, Quaternion.Euler(90,0,180));
                 Debug.Log("Spawned new object at: " + spawnPosition);
                 StartCoroutine(CooldownRoutine());
             }
