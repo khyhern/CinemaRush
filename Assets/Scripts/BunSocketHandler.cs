@@ -20,40 +20,37 @@ public class BunSocketHandler : MonoBehaviour
     public void OnSausageInserted(SelectEnterEventArgs args)
     {
         GameObject insertedObject = args.interactableObject.transform.gameObject;
+        CookSausage sausage = insertedObject.GetComponent<CookSausage>();
 
-        if (insertedObject.CompareTag("Food")) // Ensure the inserted object is food
+        if (sausage != null && bun != null) // Ensure the inserted object is a sausage
         {
-            CookSausage sausage = insertedObject.GetComponent<CookSausage>();
+            // Change the sausage tag to "CombinedFood" so it doesn't count separately in tray
+            insertedObject.tag = "CombinedFood";
 
-            if (sausage != null && bun != null)
+            // Check the state of the sausage and update the bun's name
+            switch (sausage.state)
             {
-                // Change the sausage tag to "CombinedFood" so it doesn't count separately in tray
-                insertedObject.tag = "CombinedFood";
+                case CookSausage.SausageState.Raw:
+                    SoundManager.Instance.PlayOneShot("sausage in bun");
+                    bun.ChangeFoodName("Raw Hotdog");
+                    Debug.Log("Raw Sausage inserted! Bun is now a Raw Hotdog.");
+                    break;
 
-                // Check the state of the sausage and update the bun's name
-                switch (sausage.state)
-                {
-                    case CookSausage.SausageState.Raw:
-                        SoundManager.Instance.PlayOneShot("sausage in bun");
-                        bun.ChangeFoodName("Raw Hotdog");
-                        Debug.Log("Raw Sausage inserted! Bun is now a Raw Hotdog.");
-                        break;
+                case CookSausage.SausageState.Cooked:
+                    SoundManager.Instance.PlayOneShot("sausage in bun");
+                    bun.ChangeFoodName("Hotdog");
+                    Debug.Log("Cooked Sausage inserted! Bun is now a Cooked Hotdog.");
+                    break;
 
-                    case CookSausage.SausageState.Cooked:
-                        SoundManager.Instance.PlayOneShot("sausage in bun");
-                        bun.ChangeFoodName("Hotdog");
-                        Debug.Log("Cooked Sausage inserted! Bun is now a Cooked Hotdog.");
-                        break;
-
-                    case CookSausage.SausageState.Burnt:
-                        SoundManager.Instance.PlayOneShot("sausage in bun");
-                        bun.ChangeFoodName("Burnt Hotdog");
-                        Debug.Log("Burnt Sausage inserted! Bun is now a Burnt Hotdog.");
-                        break;
-                }
+                case CookSausage.SausageState.Burnt:
+                    SoundManager.Instance.PlayOneShot("sausage in bun");
+                    bun.ChangeFoodName("Burnt Hotdog");
+                    Debug.Log("Burnt Sausage inserted! Bun is now a Burnt Hotdog.");
+                    break;
             }
         }
     }
+
 
     // Called when a sausage is removed from the socket
     public void OnSausageRemoved(SelectExitEventArgs args)

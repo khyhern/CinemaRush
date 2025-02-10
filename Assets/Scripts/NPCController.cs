@@ -183,7 +183,7 @@ public class NPCController : MonoBehaviour
     }
     private void GenerateRandomOrder()
     {
-        string[] menuItems = { "Bun", "Sausage", "Hotdog", "Popcorn"}; //"Popcorn"
+        string[] menuItems = { "Bun", "Sausage", "Hotdog", "Popcorn" }; //"Popcorn"
         string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
 
         // Randomly pick a main item
@@ -202,7 +202,7 @@ public class NPCController : MonoBehaviour
         // Update 3D TextMesh if the NPC is in the first position
         if (NPCorderText != null)
         {
-            NPCorderText.text = npcOrder;
+            NPCorderText.text = includeSoda ? $"{mainItem}\n{soda}" : mainItem;
         }
         else
         {
