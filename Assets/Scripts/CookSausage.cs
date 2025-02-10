@@ -74,12 +74,14 @@ public class CookSausage : MonoBehaviour
             if (!isCooked && cookTime >= cookDuration)
             {
                 CookSausageFully();
+                SoundManager.Instance.PlayOneShot("sausage done");
             }
 
             // Burn the sausage after burnDuration
             if (cookTime >= burnDuration)
             {
                 BurnSausage();
+                SoundManager.Instance.PlayOneShot("burn");
             }
         }
     }

@@ -25,6 +25,7 @@ public class FireExtinguisher : MonoBehaviour
         // Perform a raycast from the raycast point forward
         if (Physics.Raycast(raycastPoint.position, raycastPoint.forward, out RaycastHit hit, range))
         {
+            SoundManager.Instance.PlayOneShot("fire ext");
             // Visualize the ray as a debug line in the scene view
             Debug.DrawRay(raycastPoint.position, raycastPoint.forward * hit.distance, rayColor, 1f);
 

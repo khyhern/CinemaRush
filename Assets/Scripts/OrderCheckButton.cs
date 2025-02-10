@@ -9,6 +9,7 @@ public class OrderCheckButton : MonoBehaviour
     // Method to check the NPC order when the button is pressed
     public void CheckNPCOrder()
     {
+        SoundManager.Instance.PlayOneShot("btnpress");
         if (cashierTrigger == null || trayManager == null)
         {
             Debug.LogError("CashierTrigger or TrayManager reference is missing!");
@@ -44,10 +45,27 @@ public class OrderCheckButton : MonoBehaviour
             {
                 Debug.Log("? Order is correct! NPC is happy.");
                 currentNPC.SetOrderStatus(true); // NPC processes and leaves
+                if (currentNPC.name == "MaleA(Clone)")
+                {
+                    SoundManager.Instance.PlayOneShot("happy customer 1");
+                }
+                else if (currentNPC.name == "FemaleA(Clone)")
+                {
+                    SoundManager.Instance.PlayOneShot("happy customer 2");
+                }
+
                 trayManager.ClearTray(); // Remove all food from the tray
             }
             else
             {
+                if (currentNPC.name == "MaleA(Clone)")
+                {
+                    SoundManager.Instance.PlayOneShot("angry customer 1");
+                }
+                else if(currentNPC.name == "FemaleA(Clone)")
+                {
+                    SoundManager.Instance.PlayOneShot("angry customer 2");
+                }
                 Debug.Log("? Order is incorrect. Try again.");
             }
         }

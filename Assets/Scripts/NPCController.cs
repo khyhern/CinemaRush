@@ -183,14 +183,15 @@ public class NPCController : MonoBehaviour
     }
     private void GenerateRandomOrder()
     {
-        string[] menuItems = { "Bun", "Sausage", "Hotdog"}; //"Popcorn"
+        string[] menuItems = { "Bun", "Sausage", "Hotdog", "Popcorn" }; //"Popcorn"
         string[] sodaFlavors = { "Green Soda", "Orange Soda", "Purple Soda" };
 
         // Randomly pick a main item
         string mainItem = menuItems[Random.Range(0, menuItems.Length)];
 
         // 50% chance to include a soda in the order
-        bool includeSoda = false; // Random.value > 0.5f;
+        //bool includeSoda = false; // Random.value > 0.5f;
+        bool includeSoda = Random.value > 0.5f;
         string soda = includeSoda ? sodaFlavors[Random.Range(0, sodaFlavors.Length)] : "";
 
         // Construct order
@@ -201,7 +202,7 @@ public class NPCController : MonoBehaviour
         // Update 3D TextMesh if the NPC is in the first position
         if (NPCorderText != null)
         {
-            NPCorderText.text = npcOrder;
+            NPCorderText.text = includeSoda ? $"{mainItem}\n{soda}" : mainItem;
         }
         else
         {

@@ -415,6 +415,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 649337117306914990, guid: ac307aa8cc208364695966772429ebde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6187762389729816305, guid: ac307aa8cc208364695966772429ebde,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -470,8 +475,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: FemaleA
       objectReference: {fileID: 0}
+    - target: {fileID: 8898443665225364661, guid: ac307aa8cc208364695966772429ebde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4588903628510172034, guid: ac307aa8cc208364695966772429ebde, type: 3}
+    - {fileID: 649337117306914990, guid: ac307aa8cc208364695966772429ebde, type: 3}
+    - {fileID: 8898443665225364661, guid: ac307aa8cc208364695966772429ebde, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6187762389729816305, guid: ac307aa8cc208364695966772429ebde,
         type: 3}

@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6594306684617098587}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.101, y: 0.89, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.323, y: 1.034, z: 0}
   m_LocalScale: {x: 0.09755337, y: 0.09755337, z: 0.09755337}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6187762389729816305}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!23 &4053170985370101512
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -83,12 +83,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6594306684617098587}
-  m_Text: Bun
+  m_Text: 'Bun
+
+    Green Soda'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 0
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 0
   m_FontStyle: 0
@@ -123,7 +125,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 88692399fd428e342a782fdc0657ce08,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.2488847
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88692399fd428e342a782fdc0657ce08,
         type: 3}
@@ -133,7 +135,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 88692399fd428e342a782fdc0657ce08,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1402845
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88692399fd428e342a782fdc0657ce08,
         type: 3}
