@@ -5,7 +5,6 @@ public class BucketFill : MonoBehaviour
     private bool firstFillComplete = false; // Tracks if bucket_fill_mesh1 has been filled
     public AudioSource fillSoundEffect;      // Sound to play AFTER the effect ends
 
-
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object is named "ScoopCollider"
@@ -26,26 +25,15 @@ public class BucketFill : MonoBehaviour
 
                     if (!firstFillComplete)
                     {
-                        FillBucket("bucket_fill_mesh1");
-                        firstFillComplete = true; // Mark first fill complete
+                        FillBucket("bucket_fill_mesh1");  // Fill first layer
+                        firstFillComplete = true;
                         fillSoundEffect.Play();
                     }
                     else
                     {
-                        FillBucket("bucket_fill_mesh2");
+                        FillBucket("bucket_fill_mesh2");  // Fill second layer
                         fillSoundEffect.Play();
-
-                        // Find the 'PopcornBucket' in the scene
-                        GameObject popcornBucket = GameObject.Find("PopcornBucket");
-
-                        if (popcornBucket != null && popcornBucket.layer == LayerMask.NameToLayer("Popcorn"))
-                        {
-                            UpdatePopcornBucket(popcornBucket);
-                        }
-                        else
-                        {
-                            Debug.LogWarning("'PopcornBucket' not found or not on the 'Popcorn' layer.");
-                        }
+                        UpdatePopcornBucket(); // Only update this specific bucket
                     }
 
                     // Disable scoop_fill_mesh after transferring
@@ -66,8 +54,8 @@ public class BucketFill : MonoBehaviour
 
     private void FillBucket(string bucketMeshName)
     {
-        // Find the bucket fill mesh by name
-        GameObject bucketFillMesh = GameObject.Find(bucketMeshName);
+        // Find the bucket fill mesh inside THIS specific popcorn bucket instance
+        Transform bucketFillMesh = FindChildRecursively(transform, bucketMeshName);
 
         if (bucketFillMesh != null)
         {
@@ -76,16 +64,79 @@ public class BucketFill : MonoBehaviour
             if (bucketRenderer != null)
             {
                 bucketRenderer.enabled = true;
-                Debug.Log($"'{bucketMeshName}' is now ON.");
+                Debug.Log($"'{bucketMeshName}' is now ON in {gameObject.name}.");
             }
         }
         else
         {
-            Debug.LogWarning($"'{bucketMeshName}' not found in the scene.");
+            Debug.LogWarning($"'{bucketMeshName}' not found in {gameObject.name}.");
         }
     }
 
-    private void UpdatePopcornBucket(GameObject popcornBucket)
+    private void UpdatePopcornBucket()
+    {
+        // Find the top-level parent (PopcornBucket)
+        Transform rootBucket = transform;
+        while (rootBucket.parent != null)
+        {
+            rootBucket = rootBucket.parent; // Keep going up until we reach the root
+        }
+
+        Debug.Log($"Root bucket found: {rootBucket.name}");
+
+        // Ensure this is a PopcornBucket instance
+        if (rootBucket.name.StartsWith("PopcornBucket"))
+        {
+            rootBucket.tag = "Untagged"; // Reset to force Unity to recognize the change
+            rootBucket.tag = "Food";
+
+            // Change the tag of all children
+            foreach (Transform child in rootBucket)
+            {
+                child.tag = "Untagged";
+                child.tag = "Food";
+            }
+
+            // Ensure FoodItem script exists on the PopcornBucket
+            FoodItem foodItem = rootBucket.GetComponent<FoodItem>();
+            if (foodItem != null)
+            {
+                foodItem.ChangeFoodName("Popcorn");
+                Debug.Log($"{rootBucket.name} and its children are now tagged as 'Food', and foodName is set to 'Popcorn'.");
+            }
+            else
+            {
+                Debug.LogWarning($"{rootBucket.name} does not have a FoodItem script attached!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Root object is not a PopcornBucket! Found: {rootBucket.name}");
+        }
+    }
+
+
+    // Recursive function to find a child by name inside the object
+    private Transform FindChildRecursively(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+            {
+                return child;
+            }
+            Transform found = FindChildRecursively(child, childName);
+            if (found != null)
+            {
+                return found;
+            }
+        }
+        return null;
+    }
+}
+
+
+/*private void UpdatePopcornBucket(GameObject popcornBucket)
     {
         // Change the tag of PopcornBucket itself
         popcornBucket.tag = "Food";
@@ -107,5 +158,4 @@ public class BucketFill : MonoBehaviour
         {
             Debug.LogWarning("'PopcornBucket' does not have a FoodItem script.");
         }
-    }
-}
+*/

@@ -8,10 +8,15 @@ public class CupDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("NEWSodaCup"))   // Checks if the name contains "NEWSodaCup"
+        if (other.gameObject.name.Contains("NEWSodaCup"))  // Check if object is filled
         {
+            if (other.transform.Find("IsFilled") != null)
             {
-                isCupInSocket = true;
+                isCupInSocket = false;  // If "IsFilled" is found, set isCupInSocket to false
+            }
+            else
+            {
+                isCupInSocket = true; // Otherwise, set isCupInSocket to true
             }
         }
     }

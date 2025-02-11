@@ -35,8 +35,6 @@ Transform:
   m_LocalScale: {x: 0.41958168, y: 0.41958174, z: 0.41958168}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3159810044492451379}
-  - {fileID: 6721499730409861451}
   - {fileID: 1622320883314349141}
   - {fileID: 14325008370339142}
   m_Father: {fileID: 0}
@@ -333,11 +331,11 @@ Transform:
   m_GameObject: {fileID: 2089698230492045313}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.42, z: 0.17}
-  m_LocalScale: {x: 19.11701, y: 19.117014, z: 19.117012}
+  m_LocalPosition: {x: 0, y: -0.24401574, z: -0.37183392}
+  m_LocalScale: {x: 11.106791, y: 11.106793, z: 11.1067915}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7223754257731401404}
+  m_Father: {fileID: 14325008370339142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7419983744047880849
 MeshFilter:
@@ -447,12 +445,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638052701299575115}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000059604645, y: -0.000000059604645, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.0059914, y: 0.0031366, z: -0.48227}
-  m_LocalScale: {x: 12.894502, y: 12.894503, z: 12.8945055}
+  m_LocalRotation: {x: -0.000000029802322, y: -0.000000029802322, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.0034809483, y: 0.0018223269, z: -0.7507957}
+  m_LocalScale: {x: 7.491577, y: 7.491577, z: 7.491579}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7223754257731401404}
+  m_Father: {fileID: 14325008370339142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3561676334461805686
 MeshFilter:
@@ -537,7 +535,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0.81}
   m_LocalScale: {x: 1.7212, y: 1.7212, z: 1.7212}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3159810044492451379}
+  - {fileID: 6721499730409861451}
   m_Father: {fileID: 7223754257731401404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9188249065784144495
