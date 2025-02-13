@@ -182,7 +182,14 @@ public class NPCController : MonoBehaviour
     public void SetOrderStatus(bool isCompleted)
     {
         isOrderCompletedCorrectly = isCompleted; // Set this value based on external logic
+
+        if (isOrderCompletedCorrectly) // If order is completed correctly, exit immediately
+        {
+            StopAllCoroutines(); // Stop any running coroutines, including HandleExitAfterDelay
+            StartCoroutine(FollowExitPath(happyExitPath)); // Exit immediately
+        }
     }
+
     private void GenerateRandomOrder()
     {
         string[] menuItems = { "Bun", "Sausage", "Hotdog", "Popcorn" }; //"Popcorn"
