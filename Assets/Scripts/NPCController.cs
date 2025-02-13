@@ -116,7 +116,7 @@ public class NPCController : MonoBehaviour
         Debug.Log("NPC has completed the queue.");
 
         // Delay duration can be a fixed value or dynamically calculated
-        float delayDuration = Random.Range(2f, 5f); // Example: random delay between 2-5 seconds
+        float delayDuration = Random.Range(30f, 35f); // Example: random delay between 2-5 seconds
         StartCoroutine(HandleExitAfterDelay(delayDuration));
     }
 
