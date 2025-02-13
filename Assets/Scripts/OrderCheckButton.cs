@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class OrderCheckButton : MonoBehaviour
 {
+    public Text txtElement;
+    private int happyCustomerCount = 0;
     public CashierTrigger cashierTrigger;  // Reference to the cashier trigger
     public TrayManager trayManager; // Reference to the tray manager
-
     // Method to check the NPC order when the button is pressed
     public void CheckNPCOrder()
     {
@@ -43,6 +45,8 @@ public class OrderCheckButton : MonoBehaviour
 
             if (orderCorrect)
             {
+                happyCustomerCount++;
+                txtElement.text = ("Happy: " + happyCustomerCount);
                 Debug.Log("? Order is correct! NPC is happy.");
                 currentNPC.SetOrderStatus(true); // NPC processes and leaves
                 if (currentNPC.name == "MaleA(Clone)")
