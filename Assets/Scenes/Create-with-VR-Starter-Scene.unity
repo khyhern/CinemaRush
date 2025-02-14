@@ -8475,7 +8475,7 @@ MonoBehaviour:
   - {fileID: 4763584460791529628, guid: 21601eae5aa7872408c08cb380ee8285, type: 3}
   spawnPoint: {fileID: 1294467288}
   spawnInterval: 2
-  maxNPCs: 5
+  maxNPCs: 7
 --- !u!1 &1383374716
 GameObject:
   m_ObjectHideFlags: 0
